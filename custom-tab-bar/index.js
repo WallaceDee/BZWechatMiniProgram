@@ -2,17 +2,22 @@ Component({
   data: {
     selected: 0,
     color: "#7A7E83",
-    selectedColor: "#3cc51f",
+    selectedColor: "#44818F",
     list: [{
-      pagePath: "/pages/logs/logs",
-      iconPath: "/image/icon_component.png",
-      selectedIconPath: "/image/icon_component_HL.png",
-      text: "组件"
-    }, {
       pagePath: "/pages/index/index",
-      iconPath: "/image/icon_API.png",
-      selectedIconPath: "/image/icon_API_HL.png",
-      text: "接口"
+      iconPath: "/image/icon_home.png",
+      selectedIconPath: "/image/icon_home_HL.png",
+      text: "首页"
+    }, {
+      pagePath: "/pages/case/case",
+      iconPath: "/image/icon_case.png",
+      selectedIconPath: "/image/icon_case_HL.png",
+      text: "案件"
+    }, {
+      pagePath: "/pages/mine/mine",
+      iconPath: "/image/icon_mine.png",
+      selectedIconPath: "/image/icon_mine_HL.png",
+      text: "我的"
     }]
   },
   attached() {
