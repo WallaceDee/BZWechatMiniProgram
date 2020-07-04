@@ -1,1 +1,10 @@
 /* components/navbar/navbar.wxss */
+.nav-bar .title{
+  text-align: center;
+  font-size: 18px;
+  color: #333;
+  font-weight: 500;
+}
+.title:empty{
+  display: none;
+}

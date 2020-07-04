@@ -5,9 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    current: 'tab1',
     currentIndex: 0,
-    "firstList": ["LXT", "LXT", "LXT", "LXT", "LXT", "LXT"],
-    "secondList": ["GFF", "GFF", "GFF", "GFF", "GFF", "GFF", "GFF", "GFF"],
     background: ['demo-text-1', 'demo-text-2', 'demo-text-3'],
     indicatorDots: true,
     vertical: false,
@@ -15,25 +14,11 @@ Page({
     interval: 2000,
     duration: 500
   },
-  //swiper切换时会调用
-  pagechange: function (e) {
-    if ("touch" === e.detail.source) {
-      let currentPageIndex = this.data.currentIndex
-      currentPageIndex = (currentPageIndex + 1) % 2
-      this.setData({
-        currentIndex: currentPageIndex
-      })
-    }
-  },
-  //用户点击tab时调用
-  titleClick: function (e) {
-    let currentPageIndex =
-      this.setData({
-        //拿到当前索引并动态改变
-        currentIndex: e.currentTarget.dataset.idx
-      })
-  },
-
+  handleChange ({ detail }) {
+    this.setData({
+        current: detail.key
+    });
+},
   /**
    * 生命周期函数--监听页面加载
    */
