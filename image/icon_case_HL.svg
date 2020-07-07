@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
+    <title>案件</title>
+    <desc>Created with Sketch.</desc>
+    <g id="页面-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="案件" transform="translate(-178.000000, -736.000000)">
+            <g id="tabbar" transform="translate(0.000000, 728.000000)">
+                <g id="案件" transform="translate(178.000000, 8.000000)">
+                    <path d="M15,2 C16.1045695,2 17,2.8954305 17,4 L17,16 C17,17.1045695 16.1045695,18 15,18 L5,18 C3.8954305,18 3,17.1045695 3,16 L3,4 C3,2.8954305 3.8954305,2 5,2 L15,2 Z" id="路径" fill="#00AFB7" fill-rule="nonzero"></path>
+                    <path d="M14,2 L14,6.45599788 C14,6.73214026 13.7761424,6.95599788 13.5,6.95599788 C13.4363903,6.95599788 13.3733648,6.94386028 13.3143047,6.92023623 L11.6856953,6.2687925 C11.5664898,6.22111029 11.4335102,6.22111029 11.3143047,6.2687925 L9.68569534,6.92023623 C9.42930358,7.02279293 9.13831836,6.89808498 9.03576165,6.64169322 C9.0121376,6.58263308 9,6.5196076 9,6.45599788 L9,2 L14,2 Z M12.75,2 L10.25,2 L10.25,5.34751436 L10.8500663,5.10819664 C11.2151332,4.96216988 11.6171105,4.94391653 11.9914049,5.0534366 L12.1499337,5.10819664 L12.75,5.34851436 L12.75,2 Z" id="矩形" fill="#FFFFFF" fill-rule="nonzero"></path>
+                    <rect id="矩形" fill="#FFFFFF" opacity="0.503162202" x="6" y="10" width="6" height="1.5" rx="0.75"></rect>
+                    <rect id="矩形备份-3" fill="#FFFFFF" opacity="0.503162202" x="6" y="13" width="8" height="1.5" rx="0.75"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

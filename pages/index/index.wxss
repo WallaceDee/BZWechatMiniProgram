@@ -5,6 +5,18 @@
   flex-direction: column;
   box-sizing: border-box;
 }
-.i-tabs{
-  justify-content: flex-start!important;
+.nav-tabs {
+  justify-content: flex-start !important;
+}
+.nav-tab {
+  font-size: 18px;
+}
+.nav-tab .i-tabs-tab-title {
+  font-size: 18px;
+  color: #353839;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.nav-tab .i-tabs-tab-title-current {
+  font-weight: bold;
 }

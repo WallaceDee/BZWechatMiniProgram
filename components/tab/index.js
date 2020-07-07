@@ -1,5 +1,5 @@
 Component({
-    externalClasses: ['i-class'],
+    externalClasses: ['i-class','i-tabs-tab-title','i-tabs-tab-title-current'],
 
     relations: {
         '../tabs/index': {
