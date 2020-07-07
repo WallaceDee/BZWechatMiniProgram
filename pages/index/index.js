@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    navHeight:40,
     current: 'tab1',
     currentIndex: 0,
     background: ['demo-text-1', 'demo-text-2', 'demo-text-3'],
@@ -12,12 +13,21 @@ Page({
     vertical: false,
     autoplay: false,
     interval: 2000,
-    duration: 500
+    duration: 500,
+    currentFilterKeyword:'filter1'
+  },
+  onNavBarReady(e){
+    this.navHeight=e.detail
   },
   handleChange ({ detail }) {
     this.setData({
         current: detail.key
     });
+},
+handleFilterChange({ detail }) {
+  this.setData({
+    currentFilterKeyword: detail.key
+  });
 },
   /**
    * 生命周期函数--监听页面加载

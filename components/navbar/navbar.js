@@ -41,6 +41,7 @@ Component({
             console.log(gap,rect.height)
             return 2 * gap + rect.height;
           })();
+    this.triggerEvent('onNavBarReady', this.height)     
      },
     hide: function () { },
     resize: function () { },
