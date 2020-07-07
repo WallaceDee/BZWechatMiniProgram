@@ -1,2 +1,31 @@
 <!--pages/mine/mine.wxml-->
-<text>pages/mine/mine.wxml</text>
+<nav-bar title="个人中心"></nav-bar>
+<view class="container">
+	<view class="userinfo">
+		<button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+		<block wx:else>
+			<image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+			<text class="userinfo-nickname">{{userInfo.nickName}}</text>
+		</block>
+	</view>
+	<i-cell-group>
+		<i-cell title="我的信息" is-link>
+			<image class="icon" slot="icon" src="../../image/icon_user.svg"></image>
+		</i-cell>
+		<i-cell title="我的订阅" is-link>
+			<image class="icon" slot="icon" src="../../image/icon_subscribe.svg"></image>
+		</i-cell>
+		<i-cell title="我的收藏" is-link>
+			<image class="icon" slot="icon" src="../../image/icon_heart.svg"></image>
+		</i-cell>
+		<i-cell title="我的发送" is-link>
+			<image class="icon" slot="icon" src="../../image/icon_email_gray.svg"></image>
+		</i-cell>
+		<i-cell title="我的需求" is-link>
+			<image class="icon" slot="icon" src="../../image/icon_dialog.svg"></image>
+		</i-cell>
+		<i-cell title="在线客服" is-link>
+			<image class="icon" slot="icon" src="../../image/icon_earphone.svg"></image>
+		</i-cell>
+	</i-cell-group>
+</view>

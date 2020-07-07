@@ -16,9 +16,6 @@ Page({
     duration: 500,
     currentFilterKeyword:'filter1'
   },
-  onNavBarReady(e){
-    this.navHeight=e.detail
-  },
   handleChange ({ detail }) {
     this.setData({
         current: detail.key

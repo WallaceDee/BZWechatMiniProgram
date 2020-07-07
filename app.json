@@ -5,7 +5,7 @@
     "pages/mine/mine"
   ],
   "tabBar": {
-    "custom": true,
+    "custom": false,
     "color": "#7A7E83",
     "selectedColor": "#44818F",
     "borderStyle": "black",
