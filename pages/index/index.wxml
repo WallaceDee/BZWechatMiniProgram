@@ -24,8 +24,8 @@
 			<i-tab i-class="filter-tab" i-tab-title-class="filter-title" i-tab-title-current="filter-title-active" key="filter2" title="广州"></i-tab>
 		</i-tabs>
 	</view>
-	<scroll-view class="list" scroll-y="true" style="height: 0;">
-		<view class="section" wx:for="{{3}}">
+	<scroll-view class="article-list" scroll-y="true" style="height: 0;">
+		<view class="section" wx:for="{{3}}" wx:key="index">
 			<text>06月17日 · 星期三</text>
 			<view class="item">
 				<text>21:36</text>
