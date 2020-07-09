@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/case/case",
-    "pages/mine/mine"
+    "pages/mine/mine",
+    "pages/article/article"
   ],
   "tabBar": {
     "custom": false,
@@ -18,7 +19,7 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/case/case",
+        "pagePath": "pages/article/article",
         "iconPath": "image/icon_case.png",
         "selectedIconPath": "image/icon_case_HL.png",
         "text": "案件"
@@ -36,7 +37,7 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black",
-    "navigationStyle":"custom"
+    "navigationStyle": "custom"
   },
   "sitemapLocation": "sitemap.json"
 }

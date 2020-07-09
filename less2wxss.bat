@@ -1,1 +1,1 @@
-wxss .\
+wxss .\ && wxss .\pages\

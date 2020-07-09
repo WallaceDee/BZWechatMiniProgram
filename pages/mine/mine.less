@@ -1,6 +1,41 @@
 .userInfo {
   display: flex;
   padding: 0 20px;
+  margin-bottom: 30px;
+  .login{
+    background-color: transparent;
+    display: inline;
+    padding: 0;
+    line-height: initial;
+    &::after{
+      display: none;
+    }
+  }
+  .gender{
+    position: absolute;
+    background-color: #fff;
+    text-align: center;
+    z-index: 2;
+    right: 0;
+    bottom: 0;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    border-radius: 50%;
+    >image{
+      width: 16px;
+      height: 16px;
+      &:last-child{
+        display: none;
+      }
+    }
+    &.female>image:last-child{
+      display: inline-block;
+    }
+    &.female>image:first-child{
+      display: none;
+    }
+  }
   .avatar {
     width:60px;
     height:60px;
@@ -8,7 +43,7 @@
     border:1px solid rgba(255,255,255,1);
     border-radius: 50%;
   }
-  .nickname {
+  .nickname ,.login{
     font-size: 20px;
     color: #373737;
   }
@@ -20,11 +55,14 @@
   flex-shrink: 0;
   }
   >view:last-child{
+    position: relative;
     margin-left: 16px;
     width: 70%;
     display: flex;
     align-items: center;
-
+    >view{
+      width: 100%;
+    }
     >view>view{
       white-space: nowrap;
       text-overflow: ellipsis;

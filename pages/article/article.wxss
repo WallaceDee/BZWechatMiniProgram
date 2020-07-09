@@ -1,0 +1,75 @@
+.article {
+  margin: 0 20px;
+}
+.article .title {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  color: #353839;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 34px;
+}
+.article .sub {
+  font-size: 13px;
+  font-weight: 400;
+  color: #878e90;
+  line-height: 18px;
+  margin-bottom: 35px;
+  margin-top: 10px;
+}
+.related {
+  margin: 0 20px;
+}
+.related > text {
+  display: block;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  color: #353839;
+  line-height: 21px;
+  margin: 20px auto;
+}
+.related > view {
+  position: relative;
+  margin-top: 10px;
+}
+.related > view > text {
+  display: block;
+}
+.related > view > text:first-child {
+  font-size: 15px;
+  font-weight: bold;
+  color: #353839;
+  line-height: 21px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.related > view > text:nth-child(2) {
+  font-size: 13px;
+  font-weight: 400;
+  color: #878E90;
+  line-height: 22px;
+}
+.related > view > text:nth-child(3) {
+  font-size: 13px;
+  font-weight: 400;
+  color: #878e90;
+  line-height: 18px;
+  padding-bottom: 10px;
+}
+.related > view::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  transform: scale(0.5);
+  transform-origin: 0 0;
+  pointer-events: none;
+  box-sizing: border-box;
+  border: 0 solid #e9eaec;
+  border-bottom-width: 1px;
+}

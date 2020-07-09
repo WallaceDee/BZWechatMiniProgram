@@ -1,0 +1,19 @@
+<!--pages/article/article.wxml-->
+<nav-bar></nav-bar>
+<view class="container">
+	<scroll-view scroll-y>
+		<view class="article">
+			<text class="title">“粽”情端午博物馆里的端午节，这样度过才精彩！</text>
+			<text class="sub">澎湃新闻   2020-06-16 16:02</text>
+			<rich-text nodes="{{htmlSnip}}"></rich-text>
+		</view>
+		<view class="related">
+			<text>相关推荐</text>
+			<view  wx:for="{{3}}" >
+					<text>视频世界互联网大会红利 释放桐乡互联网产业…</text>
+					<text>全新一代数据可视化解决方案，致力于提供一套简单方便、专业可靠、无限可能的数据可视化最佳实践。</text>
+			  	<text>21:36</text>
+			</view>
+		</view>
+	</scroll-view>
+</view>

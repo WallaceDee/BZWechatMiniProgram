@@ -4,12 +4,19 @@
 	<view class="userInfo">
 		<!-- <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
 		<block wx:else> -->
-		<view>
-			<image class="avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+		<view style="position:relative;">
+			<image class="avatar" src="{{userInfo.avatarUrl?userInfo.avatarUrl:'../../image/default_avatar.png'}}" mode="cover"></image>
+			<view class="gender female">
+				<image src="../../image/icon_male.svg"></image>
+				<image src="../../image/icon_female.svg"></image>
+			</view>
 		</view>
-
 		<view>
-			<view>
+		<view wx:if="{{!hasUserInfo}}">
+			<view> <button class="login" open-type="getUserInfo" bindgetuserinfo="getUserInfo">登录/注册</button></view>
+			<view> <text class="company">点击登录  享受更多精彩信息</text></view>
+		</view>
+			<view wx:else>
 			<view> <text class="nickname">{{userInfo.nickName}}</text></view>
 			<view> <text class="company">帮专知识产权服务有限公司帮专知识产权服务有限公司帮专知识产权服务有限公司</text></view>
 			</view>

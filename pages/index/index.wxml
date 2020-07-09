@@ -53,5 +53,9 @@
 				</view>
 			</view>
 		</view>
+		<view class="no-data">
+		<image src="../../image/no_content.svg"></image>
+		<text>暂无内容~</text>
+		</view>
 	</scroll-view>
 </view>

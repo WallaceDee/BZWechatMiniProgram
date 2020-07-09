@@ -12,6 +12,25 @@ page {
 }
 .article-list {
   flex: 1;
+  position: relative;
+}
+.article-list .no-data {
+  display: none;
+  position: absolute;
+  width: 114px;
+  text-align: center;
+  color: #999;
+  font-size: 13px;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+.article-list .no-data > image {
+  width: 114px;
+  height: 114px;
+}
+.article-list .no-data:first-child {
+  display: block;
 }
 .article-list .section {
   padding-left: 15px;
