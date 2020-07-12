@@ -23,6 +23,7 @@
 			<i-tab i-class="filter-tab" i-tab-title-class="filter-title" i-tab-title-current="filter-title-active" key="filter1" title="大湾区"></i-tab>
 			<i-tab i-class="filter-tab" i-tab-title-class="filter-title" i-tab-title-current="filter-title-active" key="filter2" title="广州"></i-tab>
 		</i-tabs>
+		<button bindtap="toggleLeft1">edit</button>
 	</view>
 	<scroll-view class="article-list" scroll-y="true" style="height: 0;">
 		<view class="section" wx:for="{{3}}" wx:key="index">
@@ -58,4 +59,10 @@
 		<text>暂无内容~</text>
 		</view>
 	</scroll-view>
+
 </view>
+	<i-drawer i-class="full" mode="right" visible="{{showLeft1}}" bind:close="toggleLeft1">
+    <view class="demo-container" >
+        <nav-bar></nav-bar>
+    </view>
+</i-drawer>

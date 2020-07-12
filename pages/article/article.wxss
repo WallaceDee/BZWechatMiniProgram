@@ -51,6 +51,8 @@
   font-weight: 400;
   color: #878E90;
   line-height: 22px;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 .related > view > text:nth-child(3) {
   font-size: 13px;
@@ -59,7 +61,7 @@
   line-height: 18px;
   padding-bottom: 10px;
 }
-.related > view::after {
+.related > view:after {
   content: '';
   position: absolute;
   top: 0;
@@ -72,4 +74,9 @@
   box-sizing: border-box;
   border: 0 solid #e9eaec;
   border-bottom-width: 1px;
+}
+.related > view:last-child:after {
+  display: none;
+  border-bottom-width: 0;
+  opacity: 0;
 }

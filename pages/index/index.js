@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    navHeight:40,
+    showLeft1: true,
+    navHeight: 40,
     current: 'tab1',
     currentIndex: 0,
     background: ['demo-text-1', 'demo-text-2', 'demo-text-3'],
@@ -14,18 +15,31 @@ Page({
     autoplay: false,
     interval: 2000,
     duration: 500,
-    currentFilterKeyword:'filter1'
+    currentFilterKeyword: 'filter1'
   },
-  handleChange ({ detail }) {
+  aaa(){
+    console.log(1)
+  },
+  toggleLeft1() {
+
     this.setData({
-        current: detail.key
+      showLeft1: !this.data.showLeft1
     });
-},
-handleFilterChange({ detail }) {
-  this.setData({
-    currentFilterKeyword: detail.key
-  });
-},
+  },
+  handleChange({
+    detail
+  }) {
+    this.setData({
+      current: detail.key
+    });
+  },
+  handleFilterChange({
+    detail
+  }) {
+    this.setData({
+      currentFilterKeyword: detail.key
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -45,11 +59,11 @@ handleFilterChange({ detail }) {
    */
   onShow: function () {
     if (typeof this.getTabBar === 'function' &&
-    this.getTabBar()) {
-    this.getTabBar().setData({
-      selected: 0
-    })
-  }
+      this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 0
+      })
+    }
   },
 
   /**
