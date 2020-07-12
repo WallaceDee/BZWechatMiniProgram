@@ -1,4 +1,8 @@
 <view class="nav-bar" style="padding-top:{{statusBarHeight}}px;height:{{height+4}}px;line-height:{{height+4}}px">
 <view class="custom"><slot></slot></view>
+<view class="default">
+  <view class="icon-back"></view>
   <view class="title"><text>{{title}}</text></view>
+</view>
+
 </view>

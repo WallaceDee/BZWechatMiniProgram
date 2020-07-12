@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showLeft1: true,
+    showLeft1: false,
     navHeight: 40,
     current: 'tab1',
     currentIndex: 0,
