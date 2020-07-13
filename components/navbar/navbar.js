@@ -14,6 +14,14 @@ Component({
     title:{ 
       type: String,
       value: ''
+    },
+    custom:{ 
+      type: Boolean,
+      value: false
+    },
+    back:{ 
+      type: Boolean,
+      value: true
     }
   },
 
@@ -29,7 +37,9 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    onBackClick(){
+      this.triggerEvent('back', {},{})
+    }
   },
   pageLifetimes: {
     // 组件所在页面的生命周期函数

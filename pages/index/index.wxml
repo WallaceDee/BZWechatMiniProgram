@@ -1,4 +1,4 @@
-<nav-bar>
+<nav-bar custom>
 	<i-tabs scroll i-class="nav-tabs" current="{{ current }}" bindchange="handleChange">
 		<i-tab i-class="nav-tab" i-tab-title-class="nav-title" i-tab-title-current="nav-title-active" i-tab-underline="no-underline" key="tab1" title="领域"></i-tab>
 		<i-tab i-class="nav-tab" i-tab-title-class="nav-title" i-tab-title-current="nav-title-active" i-tab-underline="no-underline" key="tab2" title="地域"></i-tab>

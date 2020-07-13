@@ -52,5 +52,8 @@ Page({
         hasUserInfo: true
       })
     }
+  },
+  test(){
+    console.log(2)
   }
 })
