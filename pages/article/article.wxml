@@ -1,5 +1,4 @@
 <!--pages/article/article.wxml-->
-<nav-bar></nav-bar>
 <view class="container">
 	<scroll-view scroll-y style="height:100%;">
 		<view class="article">

@@ -51,7 +51,7 @@
   margin-left: 5px;
 }
 .container .filter-bar i-tabs {
-  width: 80%;
+  width: 90%;
   margin-left: 20px;
 }
 .container .filter-bar i-tabs .filter-tabs::after {
@@ -64,6 +64,27 @@
 .container .filter-bar i-tabs .filter-tabs .filter-title-active {
   font-weight: bold;
   text-align: center;
+}
+.container .filter-bar .more-btn {
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #999;
+  border-radius: 3px;
+}
+.container .filter-bar .more-btn:before {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border: 1px solid #999;
+  border-width: 1px 0 0 1px;
+  transform: rotate(225deg);
+  left: 50%;
+  top: 70%;
+  transform-origin: 0 0;
 }
 .nav-tabs::after {
   display: none;
@@ -92,7 +113,7 @@
 .nav-tabs .nav-tab .no-underline {
   display: none;
 }
-.demo-container {
+.drawer-container {
   width: 100vw;
   height: 100vh;
   background: #fff;

@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/case/case",
     "pages/mine/mine",
-    "pages/article/article"
+    "pages/article/article",
+    "pages/profile/profile"
   ],
   "tabBar": {
     "custom": false,
@@ -36,8 +37,7 @@
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black",
-    "navigationStyle": "custom"
+    "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json"
 }

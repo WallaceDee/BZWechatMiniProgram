@@ -1,7 +1,9 @@
 <view class="nav-bar" style="padding-top:{{statusBarHeight}}px;height:{{height+4}}px;line-height:{{height+4}}px">
-<view class="custom" wx:if="{{custom}}"><slot></slot></view>
-<view class="default" wx:else>
-  <view wx:if="{{back}}" class="icon-back" bindtap="onBackClick"></view>
-  <view class="title"><text>{{title}}</text></view>
-</view>
+	<view class="custom" wx:if="{{custom}}">
+		<slot></slot>
+	</view>
+	<view class="default" wx:else>
+		<view wx:if="{{back}}" class="icon-back" bindtap="onBackClick"></view>
+		<view class="title"><text>{{title}}</text></view>
+	</view>
 </view>

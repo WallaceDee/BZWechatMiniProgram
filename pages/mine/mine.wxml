@@ -1,5 +1,4 @@
 <!--pages/mine/mine.wxml-->
-<nav-bar title="个人中心" back="{{false}}"></nav-bar>
 <view class="container">
 	<view class="userInfo">
 		<!-- <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
@@ -24,7 +23,7 @@
 		<!-- </block> -->
 	</view>
 	<i-cell-group>
-		<i-cell title="我的信息" is-link>
+		<i-cell title="我的信息" is-link bind:click="go2Profile">
 			<image class="icon" slot="icon" src="../../image/icon_user.svg"></image>
 		</i-cell>
 		<i-cell title="我的订阅" is-link>

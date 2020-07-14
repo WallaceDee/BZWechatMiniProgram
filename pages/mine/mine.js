@@ -10,6 +10,11 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   //事件处理函数
+  go2Profile:function(){
+    wx.navigateTo({
+      url: '../profile/profile'
+    })
+  },
   bindViewTap: function() {
     wx.navigateTo({
       url: '../logs/logs'

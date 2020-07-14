@@ -1,44 +1,13 @@
-// pages/index/index.js
+// pages/profile/profile.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    drawerVisible: false,
-    navHeight: 40,
-    current: 'tab1',
-    currentIndex: 0,
-    background: ['demo-text-1', 'demo-text-2', 'demo-text-3'],
-    indicatorDots: true,
-    vertical: false,
-    autoplay: false,
-    interval: 2000,
-    duration: 500,
-    currentFilterKeyword: 'filter1'
+
   },
-  aaa(){
-    console.log(1)
-  },
-  handleDrawerVisible() {
-    this.setData({
-      drawerVisible: !this.data.drawerVisible
-    });
-  },
-  handleChange({
-    detail
-  }) {
-    this.setData({
-      current: detail.key
-    });
-  },
-  handleFilterChange({
-    detail
-  }) {
-    this.setData({
-      currentFilterKeyword: detail.key
-    });
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -57,12 +26,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (typeof this.getTabBar === 'function' &&
-      this.getTabBar()) {
-      this.getTabBar().setData({
-        selected: 0
-      })
-    }
+
   },
 
   /**
