@@ -38,8 +38,10 @@
 		<i-cell title="我的需求" is-link>
 			<image class="icon" slot="icon" src="../../image/icon_dialog.svg"></image>
 		</i-cell>
-		<i-cell title="在线客服" is-link>
+		<i-cell is-link bind:click="openCustomerService">
 			<image class="icon" slot="icon" src="../../image/icon_earphone.svg"></image>
+			<button open-type="contact">联系客服</button>
 		</i-cell>
 	</i-cell-group>
+
 </view>
