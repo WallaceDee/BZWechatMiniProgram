@@ -38,10 +38,17 @@
 		<i-cell title="我的需求" is-link>
 			<image class="icon" slot="icon" src="../../image/icon_dialog.svg"></image>
 		</i-cell>
-		<i-cell is-link bind:click="openCustomerService">
-			<image class="icon" slot="icon" src="../../image/icon_earphone.svg"></image>
-			<button open-type="contact">联系客服</button>
+		<button class="i-cell i-cell-access cell-btn" open-type="contact">
+			<image class="icon i-cell-icon" src="../../image/icon_earphone.svg"></image>
+			<view class="i-cell-bd">
+			<view class="i-cell-text">
+			联系客服
+			</view></view>
+			<view catchtap="navigateTo" class="i-cell-ft"> </view>
+			</button>
+		<i-cell>
 		</i-cell>
+		<button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">获取手机号</button>
 	</i-cell-group>
 
 </view>
