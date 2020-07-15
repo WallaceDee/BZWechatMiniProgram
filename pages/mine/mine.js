@@ -10,6 +10,11 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   //事件处理函数
+  getPhoneNumber (e) {
+    console.log(e.detail.errMsg)
+    console.log(e.detail.iv)
+    console.log(e.detail.encryptedData)
+  },
   go2Profile:function(){
     wx.navigateTo({
       url: '../profile/profile'

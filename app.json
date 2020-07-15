@@ -4,7 +4,9 @@
     "pages/case/case",
     "pages/mine/mine",
     "pages/article/article",
-    "pages/profile/profile"
+    "pages/profile/profile",
+    "pages/search/search",
+    "pages/category/category"
   ],
   "tabBar": {
     "custom": false,

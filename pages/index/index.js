@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    drawerVisible: false,
+    // drawerVisible: false,
     navHeight: 40,
     current: 'tab1',
     currentIndex: 0,
@@ -17,14 +17,21 @@ Page({
     duration: 500,
     currentFilterKeyword: 'filter1'
   },
-  aaa(){
-    console.log(1)
+  go2Search(){
+    wx.navigateTo({
+      url: '../search/search'
+    })
   },
-  handleDrawerVisible() {
-    this.setData({
-      drawerVisible: !this.data.drawerVisible
-    });
+  go2Category(){
+    wx.navigateTo({
+      url: '../category/category'
+    })
   },
+  // handleDrawerVisible() {
+  //   this.setData({
+  //     drawerVisible: !this.data.drawerVisible
+  //   });
+  // },
   handleChange({
     detail
   }) {

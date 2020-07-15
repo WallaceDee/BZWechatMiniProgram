@@ -1,17 +1,22 @@
+@fontColor: #353839;
+
 .userInfo {
   display: flex;
   padding: 0 20px;
   margin-bottom: 30px;
-  .login{
+
+  .login {
     background-color: transparent;
     display: inline;
     padding: 0;
     line-height: initial;
-    &::after{
+
+    &::after {
       display: none;
     }
   }
-  .gender{
+
+  .gender {
     position: absolute;
     background-color: #fff;
     text-align: center;
@@ -22,48 +27,60 @@
     height: 24px;
     line-height: 24px;
     border-radius: 50%;
-    >image{
+
+    >image {
       width: 16px;
       height: 16px;
-      &:last-child{
+
+      &:last-child {
         display: none;
       }
     }
-    &.female>image:last-child{
+
+    &.female>image:last-child {
       display: inline-block;
     }
-    &.female>image:first-child{
+
+    &.female>image:first-child {
       display: none;
     }
   }
+
   .avatar {
-    width:60px;
-    height:60px;
-    box-shadow:0px 0px 4px 0px rgba(53,56,57,0.1);
-    border:1px solid rgba(255,255,255,1);
+    width: 60px;
+    height: 60px;
+    box-shadow: 0px 0px 4px 0px rgba(53, 56, 57, 0.1);
+    border: 1px solid rgba(255, 255, 255, 1);
     border-radius: 50%;
   }
-  .nickname ,.login{
+
+  .nickname,
+  .login {
     font-size: 20px;
     color: #373737;
   }
-  .company{
+
+  .company {
     color: #999;
     font-size: 14px;
   }
-  >view:first-child{
-  flex-shrink: 0;
+
+  >view:first-child {
+    flex-shrink: 0;
   }
-  >view:last-child{
+
+  >view:last-child {
     position: relative;
     margin-left: 16px;
     width: 70%;
     display: flex;
     align-items: center;
-    >view{
+
+    >view {
       width: 100%;
     }
-    >view>view{
+
+    >view>view {
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
@@ -71,11 +88,81 @@
   }
 }
 
-
-
-
-.icon{
+.icon {
   width: 20px;
   height: 20px;
   vertical-align: -2px;
+}
+
+.cell-btn {
+  position: relative;
+  padding: 12px 15px;
+  display: flex;
+  background: #fff;
+  align-items: center;
+  line-height: 1.4;
+  font-size: 14px;
+  overflow: hidden;
+  color: @fontColor;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    transform: scale(.5);
+    transform-origin: 0 0;
+    pointer-events: none;
+    box-sizing: border-box;
+    border: 0 solid #e9eaec;
+    border-bottom-width: 1px;
+    left: 15px;
+    right: 0;
+
+  }
+
+  .icon {
+    margin-right: 5px;
+
+  }
+
+  .i-cell-bd {
+    flex: 1;
+
+    .i-cell-text {
+      line-height: 24px;
+      font-size: 14px;
+      text-align: left;
+    }
+  }
+
+  .i-cell-ft {
+    position: relative;
+    text-align: right;
+    color: #495060;
+  }
+
+  &.i-cell-access .i-cell-ft {
+    padding-right: 13px;
+    position: relative;
+    text-align: right;
+    color: #495060;
+
+    &:after {
+      content: " ";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      position: absolute;
+      top: 50%;
+      right: 2px;
+      border-width: 2px 2px 0 0;
+      border-color: #dddee1;
+      border-style: solid;
+      transform: translateY(-50%) matrix(.71, .71, -.71, .71, 0, 0)
+    }
+  }
+
 }
