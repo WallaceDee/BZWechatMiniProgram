@@ -5,9 +5,32 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    modalVisible:false,
+    gender:[{
+      label:'男',
+      value:1
+    },{
+      label:'女',
+      value:2
+    }]
   },
-
+  edit:function(){
+    this.setData(
+      {
+        modalVisible:true
+      }
+    )
+  },
+  onCancel:function(){
+    this.setData({
+      modalVisible:false
+    })
+  },
+  getPhoneNumber (e) {
+    console.log(e.detail.errMsg)
+    console.log(e.detail.iv)
+    console.log(e.detail.encryptedData)
+  },
   /**
    * 生命周期函数--监听页面加载
    */

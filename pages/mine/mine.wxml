@@ -48,7 +48,7 @@
 			</button>
 		<i-cell>
 		</i-cell>
-		<button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">获取手机号</button>
+
 	</i-cell-group>
 
 </view>

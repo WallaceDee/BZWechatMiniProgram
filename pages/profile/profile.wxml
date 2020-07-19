@@ -1,12 +1,18 @@
 <!--pages/profile/profile.wxml-->
 <view class="container">
 	<i-cell-group>
-		<i-cell title="昵称" value="WallaceDee"></i-cell>
-		<i-cell title="性别" value="男"></i-cell>
-		<i-cell title="手机号码" value="13202627449"></i-cell>
-		<i-cell title="邮箱" value="447363121@qq.com"></i-cell>
-		<i-cell title="领域" value="美术"></i-cell>
-		<i-cell title="单位" value="帮专知识产权服务有限公司"></i-cell>
-		<i-cell title="职位" value="美术老师"></i-cell>
+		<i-cell title="昵称" value="WallaceDee" onlyTapFooter is-link bind:click="edit"></i-cell>
+		<i-cell title="性别" is-link><picker  slot="footer" range="{{gender}}" range-key="label">cvxcvc</picker></i-cell>
+		<i-cell title="手机号码" is-link>
+				<button slot="footer" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">13202627449</button>
+		</i-cell>
+		<i-cell title="邮箱" value="447363121@qq.com" is-link  onlyTapFooter bind:click="edit"></i-cell>
+		<i-cell title="领域" value="美术" is-link></i-cell>
+		<i-cell title="单位" value="帮专知识产权服务有限公司" is-link></i-cell>
+		<i-cell title="职位" value="美术老师" is-link></i-cell>
 	</i-cell-group>
+	<i-modal title="修改" visible="{{ modalVisible }}" bind:ok="onOkClick" bind:cancel="onCancel">
+			  <i-input value="{{ value1 }}" autofocus placeholder="名字" />
+</i-modal>
+
 </view>

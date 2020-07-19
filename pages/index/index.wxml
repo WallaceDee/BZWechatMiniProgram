@@ -26,6 +26,7 @@
 		<view class="more-btn" bindtap="go2Category"></view>
 	</view>
 	<scroll-view class="article-list" scroll-y="true" style="height: 0;">
+	<!-- <share visible></share> -->
 		<view class="section" wx:for="{{3}}" wx:key="index">
 			<text>06月17日 · 星期三</text>
 			<view class="item">

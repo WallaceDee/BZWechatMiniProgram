@@ -1,1 +1,36 @@
-/* pages/search/search.wxss */
+.search-bar {
+  display: flex;
+  margin-top: 20px;
+  padding: 0 15px;
+}
+.search-bar button {
+  flex-shrink: 0;
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  color: #878e90;
+  line-height: 34px;
+  margin-right: 0;
+  margin-left: 0;
+}
+.search-bar button::after {
+  display: none;
+}
+.search-bar .keyword-wrapper {
+  font-size: 16px;
+  width: 90%;
+  height: 34px;
+  background: #f9f6f6;
+  border-radius: 17px;
+  display: flex;
+  align-items: center;
+  padding-right: 17px;
+}
+.search-bar .keyword-wrapper image {
+  display: block;
+  width: 16px;
+  height: 16px;
+  margin-left: 17px;
+  margin-right: 10px;
+}

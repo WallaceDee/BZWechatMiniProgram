@@ -1,2 +1,8 @@
 <!--pages/search/search.wxml-->
-<text>pages/search/search.wxml</text>
+<view class="search-bar">
+	<view class="keyword-wrapper">
+		<image src="../../image/icon_search.svg"></image>
+		<input class="keyword" value="{{ keyword }}" placeholder="搜索关键字" />
+	</view>
+	<button class="cancel-btn" bindtap="onCancel">取消</button>
+</view>
