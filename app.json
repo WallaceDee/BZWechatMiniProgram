@@ -22,7 +22,7 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/article/article",
+        "pagePath": "pages/case/case",
         "iconPath": "image/icon_case.png",
         "selectedIconPath": "image/icon_case_HL.png",
         "text": "案件"

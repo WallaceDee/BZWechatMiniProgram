@@ -1,5 +1,4 @@
 <!--pages/case/case.wxml-->
-<nav-bar></nav-bar>
 <view class="container">
 <scroll-view class="article-list" scroll-y="true" style="height: 0;">
 		<view class="section" wx:for="{{20}}">

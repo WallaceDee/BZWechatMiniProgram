@@ -35,7 +35,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    wx.request({
+      url: 'https://manage.bangzhuanwang.com/api//cwArticleInfo/v1/info', //仅为示例，并非真实的接口地址
+      data: {
+        id: '8b0702e1ecf04a39aa1be4d73622217f'
+      },
+      success (res) {
+        console.log(res.data)
+      }
+    })
+    // https://manage.bangzhuanwang.com/api//cwArticleInfo/v1/info?id=8b0702e1ecf04a39aa1be4d73622217f
   },
 
   /**

@@ -36,7 +36,6 @@ page {
   padding-left: 15px;
   padding-top: 15px;
   position: relative;
-  overflow: hidden;
 }
 .article-list .section::before {
   content: "";
@@ -50,9 +49,17 @@ page {
   z-index: 0;
 }
 .article-list .section > text {
+  display: block;
+  background-color: #fff;
   color: #353839;
   font-size: 17px;
   font-weight: bold;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 99999;
+  height: 35px;
+  line-height: 35px;
 }
 .article-list .section > text::before {
   content: "";
