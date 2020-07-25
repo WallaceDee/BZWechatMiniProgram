@@ -1,11 +1,19 @@
 // pages/profile/profile.js
+const app = getApp()
+const genderMapping = new Map([
+  [1, '男'],
+  [2, '女'],
+  [3, '未知']
+])
 Page({
 
-  /**
+  /** 
    * 页面的初始数据
    */
   data: {
+    genderMapping,
     modalVisible:false,
+    userInfo:null,
     gender:[{
       label:'男',
       value:1
@@ -27,7 +35,7 @@ Page({
     })
   },
   getPhoneNumber (e) {
-    console.log(e.detail.errMsg)
+    console.log(e)
     console.log(e.detail.iv)
     console.log(e.detail.encryptedData)
   },
@@ -35,7 +43,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      userInfo: app.globalData.userInfo
+    })
   },
 
   /**

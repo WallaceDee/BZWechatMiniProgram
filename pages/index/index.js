@@ -1,4 +1,7 @@
 // pages/index/index.js
+import { getLoginInfo } from '../../api'
+//获取应用实例
+const app = getApp()
 Page({
 
   /**
@@ -27,6 +30,12 @@ Page({
       url: '../category/category'
     })
   },
+  getLoginInfo:function(){
+    console.log(111111111111111)
+    getLoginInfo({
+      openId:app.globalData.loginInfo.openId
+    })
+  },
   // handleDrawerVisible() {
   //   this.setData({
   //     drawerVisible: !this.data.drawerVisible
@@ -50,7 +59,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    if (app.globalData.ready) {
+      this.getLoginInfo()
+    } else {
+      app.initReadyCallback = res => {
+        this.getLoginInfo()
+      }
+    }
   },
 
   /**

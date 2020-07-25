@@ -1,9 +1,10 @@
 <!--pages/article/article.wxml-->
 <view class="container">
-	<scroll-view scroll-y style="height:100%;">
+<i-spin fix wx:if="{{loading}}"></i-spin>
+	<!-- <scroll-view scroll-y style="height:100%;"> -->
 		<view class="article">
-			<text class="title">“粽”情端午博物馆里的端午节，这样度过才精彩！</text>
-			<text class="sub">澎湃新闻   2020-06-16 16:02</text>
+			<text class="title">{{title}}</text>
+			<text class="sub">澎湃新闻   {{createTime}}</text>
 			<rich-text nodes="{{htmlSnip}}"></rich-text>
 		</view>
 		<view class="related">
@@ -14,5 +15,5 @@
 			  	<text>21:36</text>
 			</view>
 		</view>
-	</scroll-view>
+	<!-- </scroll-view> -->
 </view>

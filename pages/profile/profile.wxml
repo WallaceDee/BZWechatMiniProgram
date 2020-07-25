@@ -1,10 +1,10 @@
 <!--pages/profile/profile.wxml-->
 <view class="container">
 	<i-cell-group>
-		<i-cell title="昵称" value="WallaceDee" onlyTapFooter is-link bind:click="edit"></i-cell>
-		<i-cell title="性别" is-link><picker  slot="footer" range="{{gender}}" range-key="label">cvxcvc</picker></i-cell>
+		<i-cell title="昵称" value="{{userInfo.nickname}}" onlyTapFooter is-link bind:click="edit"></i-cell>
+		<i-cell title="性别" is-link><picker  slot="footer" range="{{gender}}" range-key="label">{{userInfo.gender===1?'男':userInfo.gender===2?'女':'未知'}}</picker></i-cell>
 		<i-cell title="手机号码" is-link>
-				<button slot="footer" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">13202627449</button>
+				<button class="get-phone-btn" slot="footer" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">点击设置</button>
 		</i-cell>
 		<i-cell title="邮箱" value="447363121@qq.com" is-link  onlyTapFooter bind:click="edit"></i-cell>
 		<i-cell title="领域" value="美术" is-link></i-cell>

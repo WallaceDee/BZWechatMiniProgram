@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "i-spin": "/components/spin/index"
+  },
   "navigationBarTitleText":""
 }

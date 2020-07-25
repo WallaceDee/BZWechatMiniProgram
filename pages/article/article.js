@@ -1,22 +1,39 @@
 // pages/article/article.js
-const htmlSnip =
-`<div class="div_class">
-  <h1>Title</h1>
-  <p class="p">
-    Life is&nbsp;<i>like</i>&nbsp;a box of
-    <b>&nbsp;chocolates</b>.
-  </p>
-</div>
-`
+//获取应用实例
+const app = getApp()
+
+import {
+  getArticle
+} from '../../api'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    htmlSnip
+    loading:true,
+    htmlSnip:'',
+    title:'',
+    createTime:''
   },
-
+  getArticle: function () {
+    getArticle({
+      id: '8b0702e1ecf04a39aa1be4d73622217f'
+    }).then(res=>{
+      if(res.code===80200){
+        const {content,title,createTime}=res.data
+        this.setData({
+          htmlSnip:res.data.content,
+          title,
+          createTime
+        })
+        this.setData({
+          loading:false
+        })
+        wx.hideLoading()
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -35,16 +52,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    wx.request({
-      url: 'https://manage.bangzhuanwang.com/api//cwArticleInfo/v1/info', //仅为示例，并非真实的接口地址
-      data: {
-        id: '8b0702e1ecf04a39aa1be4d73622217f'
-      },
-      success (res) {
-        console.log(res.data)
-      }
+    wx.showLoading({
+      title: '加载中',
+      mask:true
     })
-    // https://manage.bangzhuanwang.com/api//cwArticleInfo/v1/info?id=8b0702e1ecf04a39aa1be4d73622217f
+    if (app.globalData.ready) {
+      this.getArticle()
+    } else {
+      app.initReadyCallback = res => {
+        this.getArticle()
+      }
+    }
   },
 
   /**

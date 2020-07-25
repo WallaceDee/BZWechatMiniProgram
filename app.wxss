@@ -34,19 +34,7 @@ page {
 }
 .article-list .section {
   padding-left: 15px;
-  padding-top: 15px;
   position: relative;
-}
-.article-list .section::before {
-  content: "";
-  display: block;
-  width: 1px;
-  height: 9999px;
-  border-left: 1px dashed #f8f8f8;
-  position: absolute;
-  left: 19px;
-  top: 0;
-  z-index: 0;
 }
 .article-list .section > text {
   display: block;
@@ -54,6 +42,8 @@ page {
   color: #353839;
   font-size: 17px;
   font-weight: bold;
+  position: relative;
+  overflow: hidden;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
@@ -73,12 +63,39 @@ page {
   position: relative;
   z-index: 2;
 }
+.article-list .section > text::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 999px;
+  border-left: 1px dashed #f8f8f8;
+  position: absolute;
+  left: 4px;
+  top: 0;
+  z-index: 0;
+}
+.article-list .section .item {
+  position: relative;
+  overflow: hidden;
+}
+.article-list .section .item::before {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 999px;
+  border-left: 1px dashed #f8f8f8;
+  position: absolute;
+  left: 4px;
+  top: 0;
+  z-index: 0;
+}
 .article-list .section .item > text {
   font-size: 13px;
   color: #353839;
 }
 .article-list .section .item > text::before {
   content: "";
+  background-color: #fff;
   display: inline-block;
   width: 5px;
   height: 5px;
