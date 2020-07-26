@@ -107,9 +107,9 @@ Component({
     draw() {
       wx.showLoading()
       const { userInfo, canvasWidth, canvasHeight } = this.data
-      const { avatarUrl, nickName } = userInfo
-      const avatarPromise = getImageInfo(avatarUrl)
-      const backgroundPromise = getImageInfo('https://img.xiaomeipingou.com/_assets_home-share-bg.jpg')
+      // const { avatarUrl, 'nickName' } = userInfo
+      const avatarPromise = getImageInfo('https://manage.bangzhuanwang.com/hello.jpg')
+      const backgroundPromise = getImageInfo('https://manage.bangzhuanwang.com/hello.jpg')
 
       Promise.all([avatarPromise, backgroundPromise])
         .then(([avatar, background]) => {
@@ -143,7 +143,7 @@ Component({
           ctx.setTextAlign('center')
           ctx.setFillStyle('#ffffff')
           ctx.fillText(
-            nickName,
+            'nickName',
             canvasW / 2,
             y + rpx2px(150 * 2),
           )

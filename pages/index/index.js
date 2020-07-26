@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    // drawerVisible: false,
+    userInfo: {},
     navHeight: 40,
     current: 'tab1',
     currentIndex: 0,
@@ -30,8 +30,10 @@ Page({
       url: '../category/category'
     })
   },
-  getLoginInfo:function(){
-    console.log(111111111111111)
+  getLoginInfo:function(data){
+    this.setData({
+      userInfo:data.userInfo
+    })
     getLoginInfo({
       openId:app.globalData.loginInfo.openId
     })
@@ -60,10 +62,10 @@ Page({
    */
   onLoad: function (options) {
     if (app.globalData.ready) {
-      this.getLoginInfo()
+      this.getLoginInfo(app.globalData)
     } else {
       app.initReadyCallback = res => {
-        this.getLoginInfo()
+        this.getLoginInfo(app.globalData)
       }
     }
   },
