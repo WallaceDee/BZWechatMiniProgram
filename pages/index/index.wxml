@@ -26,7 +26,7 @@
 		<view class="more-btn" bindtap="go2Category"></view>
 	</view>
 	<scroll-view class="article-list" scroll-y="true" style="height: 0;">
-	<share visible userInfo="{{}}"></share>
+	<share visible="{{shareVisible}}" userInfo="{{userInfo}}"></share>
 		<view class="section" wx:for="{{3}}" wx:key="index">
 			<text>06月17日 · 星期三</text>
 			<view class="item">
@@ -43,11 +43,11 @@
 							<image src="../../image/icon_email.svg" />
 							<text>发送邮箱</text>
 						</view>
-						<view>
+						<button class="share" open-type="share" data-shar-info="{{1111}}">
 							<image src="../../image/icon_wechat.svg" />
 							<text>好友</text>
-						</view>
-						<view>
+						</button>
+						<view bindtap="onShareTap">
 							<image src="../../image/icon_moments.svg" />
 							<text>海报</text>
 						</view>

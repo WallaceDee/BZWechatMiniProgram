@@ -55,7 +55,7 @@ page {
       position: -webkit-sticky;
       position: sticky;
       top: 0;
-      z-index: 2;
+      z-index: 3;
       height: 35px;
       line-height: 35px;
   
@@ -69,7 +69,7 @@ page {
         margin-right: 8px;
         vertical-align: 2px;
         position: relative;
-        z-index: 2;
+        z-index: 3;
         // border:4px solid #fff;
       }
  
@@ -157,11 +157,18 @@ page {
           margin-top: 10px;
           padding-right: 20px;
 
-          >view {
+          >view,>button{
             display: flex;
             align-items: center;
             height: 20px;
-
+              padding: 0;
+              margin:0;
+              background-color: transparent;
+              border: none;
+              font-size: 14px;
+              &:after{
+                display: none;
+              }
             text {
               line-height: 20px;
             }
@@ -193,5 +200,4 @@ page {
       }
     }
   }
-
 }

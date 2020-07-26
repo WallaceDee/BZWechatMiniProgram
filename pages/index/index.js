@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    shareVisible:false,
     userInfo: {},
     navHeight: 40,
     current: 'tab1',
@@ -19,6 +20,11 @@ Page({
     interval: 2000,
     duration: 500,
     currentFilterKeyword: 'filter1'
+  },
+  onShareTap(){
+    this.setData({
+      shareVisible:true
+    })
   },
   go2Search(){
     wx.navigateTo({
@@ -120,7 +126,15 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function (res) {
+    console.log(res)
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '自定义转发标题',
+      path: '/page/mine/mine'
+    }
   }
 })

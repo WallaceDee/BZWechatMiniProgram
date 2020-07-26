@@ -107,7 +107,7 @@ Component({
     draw() {
       wx.showLoading()
       const { userInfo, canvasWidth, canvasHeight } = this.data
-      // const { avatarUrl, 'nickName' } = userInfo
+      const { avatarUrl,nickName} = userInfo
       const avatarPromise = getImageInfo('https://manage.bangzhuanwang.com/hello.jpg')
       const backgroundPromise = getImageInfo('https://manage.bangzhuanwang.com/hello.jpg')
 
@@ -117,7 +117,7 @@ Component({
 
           const canvasW = rpx2px(canvasWidth * 2)
           const canvasH = rpx2px(canvasHeight * 2)
-
+          console.log(background)
           // 绘制背景
           ctx.drawImage(
             background.path,
@@ -143,7 +143,7 @@ Component({
           ctx.setTextAlign('center')
           ctx.setFillStyle('#ffffff')
           ctx.fillText(
-            'nickName',
+            nickName,
             canvasW / 2,
             y + rpx2px(150 * 2),
           )

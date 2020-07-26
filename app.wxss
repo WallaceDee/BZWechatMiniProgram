@@ -47,7 +47,7 @@ page {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  z-index: 2;
+  z-index: 3;
   height: 35px;
   line-height: 35px;
 }
@@ -61,7 +61,7 @@ page {
   margin-right: 8px;
   vertical-align: 2px;
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 .article-list .section > text::after {
   content: "";
@@ -142,15 +142,27 @@ page {
   margin-top: 10px;
   padding-right: 20px;
 }
-.article-list .section .item > view .buttons > view {
+.article-list .section .item > view .buttons > view,
+.article-list .section .item > view .buttons > button {
   display: flex;
   align-items: center;
   height: 20px;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: none;
+  font-size: 14px;
 }
-.article-list .section .item > view .buttons > view text {
+.article-list .section .item > view .buttons > view:after,
+.article-list .section .item > view .buttons > button:after {
+  display: none;
+}
+.article-list .section .item > view .buttons > view text,
+.article-list .section .item > view .buttons > button text {
   line-height: 20px;
 }
-.article-list .section .item > view .buttons > view image {
+.article-list .section .item > view .buttons > view image,
+.article-list .section .item > view .buttons > button image {
   display: inline-block;
   vertical-align: middle;
   width: 18px;
