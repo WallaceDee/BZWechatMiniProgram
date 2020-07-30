@@ -1,4 +1,5 @@
 @fontColor: #353839;
+@themeColor:#00AFB7;
 .container {
   .banner {
     margin: 5px 15px 0 15px;
@@ -16,7 +17,8 @@
 
   .filter-bar {
     position: relative;
-    margin-top: 30px;
+    height: 46px;
+    margin-top: 20px;
     display: flex;
     padding: 0 15px;
     justify-content: space-between;
@@ -59,25 +61,27 @@
       }
     }
 
-    i-tabs {
-      width: 90%;
-      margin-left: 20px;
-
-      .filter-tabs {
-        &::after {
-          display: none;
-        }
-
-        .filter-title {
-          font-size: 15px;
-          color: @fontColor;
-        }
-
-        .filter-title-active {
-          font-weight: bold;
-          text-align: center;
-        }
+    mp-tabs {
+      padding-top: 10px;
+      width: 70%;
+      margin-left: 10px;
+      margin-right: 10px;
+      swiper{
+        display: none;
       }
+      .weui-tabs-bar__title {
+        padding-bottom: 10px;
+        margin: 0px 10px;
+        font-size: 16px;
+      }
+      
+      .tab-bar-title__selected {
+        font-size: 16px;
+        font-weight: bold;
+        color: @themeColor!important;
+        border-bottom-color: @themeColor!important;
+      }
+      
     }
     .more-btn{
       position: relative;

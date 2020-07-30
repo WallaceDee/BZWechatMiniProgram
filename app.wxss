@@ -29,7 +29,7 @@ page {
   width: 114px;
   height: 114px;
 }
-.article-list .no-data:first-child {
+.article-list.loaded .no-data:first-child {
   display: block;
 }
 .article-list .section {
@@ -47,7 +47,7 @@ page {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  z-index: 99999;
+  z-index: 3;
   height: 35px;
   line-height: 35px;
 }
@@ -142,20 +142,33 @@ page {
   margin-top: 10px;
   padding-right: 20px;
 }
-.article-list .section .item > view .buttons > view {
+.article-list .section .item > view .buttons > view,
+.article-list .section .item > view .buttons > button {
   display: flex;
   align-items: center;
   height: 20px;
 }
-.article-list .section .item > view .buttons > view text {
+.article-list .section .item > view .buttons > view text,
+.article-list .section .item > view .buttons > button text {
   line-height: 20px;
 }
-.article-list .section .item > view .buttons > view image {
+.article-list .section .item > view .buttons > view image,
+.article-list .section .item > view .buttons > button image {
   display: inline-block;
   vertical-align: middle;
   width: 18px;
   height: 18px;
   margin-right: 4px;
+}
+.article-list .section .item > view .buttons > button {
+  margin: 0;
+  color: #000;
+  font-size: 14px;
+  background-color: transparent;
+  padding: 0;
+}
+.article-list .section .item > view .buttons > button:after {
+  display: none;
 }
 .article-list .section .item > view::after {
   content: '';
@@ -170,4 +183,7 @@ page {
   box-sizing: border-box;
   border: 0 solid #e9eaec;
   border-bottom-width: 1px;
+}
+.theme-loading {
+  border-color: #e9eaec #e9eaec #e9eaec #00AFB7 !important;
 }

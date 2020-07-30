@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "i-tag": "/components/tag/index",
+    "i-button": "/components/button/index",
+    "i-spin": "/components/spin/index"
+  },
+  "navigationBarTitleText":""
+}

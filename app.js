@@ -1,11 +1,25 @@
-import {login} from './api'
+import {login,getLoginInfo} from './api'
+import {watch } from './utils/util.js'
 App({
   globalData: {
     ready:false,
     statusBarHeight: wx.getSystemInfoSync()['statusBarHeight'],
     userInfo: null,
     token:'',
-    loginInfo:null
+    loginInfo:null,
+    profileInfo:null
+  },
+  getToken(){
+    return new Promise((resolve,reject)=>{
+        if(this.globalData.ready){
+          resolve(this.globalData.token)
+        }else{
+         watch(this.globalData,'ready',()=>{
+          console.log(this.globalData.ready)
+           resolve(this.globalData.token)
+         })
+        }
+    })
   },
   onLaunch: function () {
     // 展示本地存储能力
@@ -32,21 +46,33 @@ App({
                 wx.getUserInfo({
                   success: res => {
                     // 可以将 res 发送给后台解码出 unionId
-                    console.log(res)
                     this.globalData.userInfo = res.userInfo
                     res.userInfo.nickname=res.userInfo.nickName
                     login({
                       ...res.userInfo,
                       code
                     }).then(res=>{
-                      console.log(res)
                       if(res.code===80200){
                         this.globalData.token='Bearer '+res.data['access_token']
                         this.globalData.loginInfo=res.data.loginInfo
                         this.globalData.ready=true
-                        if (this.initReadyCallback) {
-                          this.initReadyCallback(res)
-                        }
+                        getLoginInfo({
+                          openId:res.data.loginInfo.openId
+                        }).then(res=>{
+                          if(res.code===80200){
+                            this.globalData.profileInfo=res.data
+                            if (this.initReadyCallback) {
+                              this.initReadyCallback(res)
+                            }
+                            const {ownedRealms,ownedCities}=res.data
+                            if(!ownedRealms.length&&!ownedCities.length){
+                              wx.navigateTo({
+                                url:'/pages/needs/needs',  //跳转页面的路径，可带参数 ？隔开，不同参数用 & 分隔；相对路径，不需要.wxml后缀
+                                success:function(){}        //成功后的回调；
+                              })
+                            }
+                          }
+                        })
                       }
                     })
                     // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回

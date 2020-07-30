@@ -4,7 +4,10 @@
     "i-tabs": "/components/tabs/index",
     "i-tab": "/components/tab/index",
     "i-drawer": "/components/drawer/index",
-    "share": "/components/share/index"
+    "i-spin": "/components/spin/index",
+    "i-load-more": "/components/load-more/index",
+    "share": "/components/share/index",
+    "mp-tabs":"/miniprogram_npm/@miniprogram-component-plus/tabs/index"
   },
   "navigationStyle": "custom"
 }

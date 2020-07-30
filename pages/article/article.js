@@ -16,9 +16,9 @@ Page({
     title:'',
     createTime:''
   },
-  getArticle: function () {
+  getArticle: function (id) {
     getArticle({
-      id: '8b0702e1ecf04a39aa1be4d73622217f'
+      id
     }).then(res=>{
       if(res.code===80200){
         const {content,title,createTime}=res.data
@@ -38,7 +38,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+     console.log(options)
+     this.getArticle(options.id)
   },
 
   /**
@@ -52,17 +53,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    wx.showLoading({
-      title: '加载中',
-      mask:true
-    })
-    if (app.globalData.ready) {
-      this.getArticle()
-    } else {
-      app.initReadyCallback = res => {
-        this.getArticle()
-      }
-    }
+    // wx.showLoading({
+    //   title: '加载中',
+    //   mask:true
+    // })
+    // if (app.globalData.ready) {
+    //   this.getArticle()
+    // } else {
+    //   app.initReadyCallback = res => {
+    //     this.getArticle()
+    //   }
+    // }
   },
 
   /**

@@ -1,0 +1,26 @@
+{
+  "name": "bzwechatminiprogram",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WallaceDee/BZWechatMiniProgram.git"
+  },
+  "keywords": [
+    "bz"
+  ],
+  "author": "wallaceChan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WallaceDee/BZWechatMiniProgram/issues"
+  },
+  "homepage": "https://github.com/WallaceDee/BZWechatMiniProgram#readme",
+  "dependencies": {
+    "@miniprogram-component-plus/tabs": "^1.0.0",
+    "weui-miniprogram": "^1.0.4"
+  }
+}

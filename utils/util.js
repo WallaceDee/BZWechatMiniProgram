@@ -14,6 +14,21 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+//监听属性值函数
+const watch=(obj,val,method)=>{
+  Object.defineProperty(obj,val,{
+    configurable:true,
+    enumerable:true,
+    set:function(nval){
+        val = nval;
+        method(nval)
+    },
+    get:function(){
+      return val
+    }
+  })
+}
 module.exports = {
-  formatTime: formatTime
+  formatTime,
+  watch
 }

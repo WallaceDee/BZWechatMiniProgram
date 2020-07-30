@@ -4,7 +4,7 @@
 	<!-- <scroll-view scroll-y style="height:100%;"> -->
 		<view class="article">
 			<text class="title">{{title}}</text>
-			<text class="sub">澎湃新闻   {{createTime}}</text>
+			<text class="sub">专利创新推送中心   {{createTime}}</text>
 			<rich-text nodes="{{htmlSnip}}"></rich-text>
 		</view>
 		<view class="related">

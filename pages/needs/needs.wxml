@@ -1,0 +1,19 @@
+<!--pages/needs/needs.wxml-->
+
+<view class="container">
+	<i-spin fix wx:if="{{loading}}"></i-spin>
+	<view class="tags-wrapper">
+		<view><text>领域</text></view>
+		<i-tag data-type="realm" wx:for="{{realm}}" wx:key="{{item.id}}" bindchange="onChange" checkable="{{true}}" name="{{index}}" color="green" checked="{{item.checked}}" type="border" style="margin-right:5px;">
+			{{item.realmName}}
+		</i-tag>
+	</view>
+
+	<view class="tags-wrapper">
+		<view><text>地域</text></view>
+		<i-tag data-type="area" wx:for="{{area}}" wx:key="{{item.code}}" bindchange="onChange" checkable="{{true}}" name="{{index}}" color="green" checked="{{item.checked}}" type="border" style="margin-right:5px;">
+			{{item.name}}
+		</i-tag>
+	</view>
+	<i-button bind:click="doSubmit" type="primary">Primary</i-button>
+</view>

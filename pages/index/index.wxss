@@ -11,7 +11,8 @@
 }
 .container .filter-bar {
   position: relative;
-  margin-top: 30px;
+  height: 46px;
+  margin-top: 20px;
   display: flex;
   padding: 0 15px;
   justify-content: space-between;
@@ -50,20 +51,25 @@
   font-size: 13px;
   margin-left: 5px;
 }
-.container .filter-bar i-tabs {
-  width: 90%;
-  margin-left: 20px;
+.container .filter-bar mp-tabs {
+  padding-top: 10px;
+  width: 70%;
+  margin-left: 10px;
+  margin-right: 10px;
 }
-.container .filter-bar i-tabs .filter-tabs::after {
+.container .filter-bar mp-tabs swiper {
   display: none;
 }
-.container .filter-bar i-tabs .filter-tabs .filter-title {
-  font-size: 15px;
-  color: #353839;
+.container .filter-bar mp-tabs .weui-tabs-bar__title {
+  padding-bottom: 10px;
+  margin: 0px 10px;
+  font-size: 16px;
 }
-.container .filter-bar i-tabs .filter-tabs .filter-title-active {
+.container .filter-bar mp-tabs .tab-bar-title__selected {
+  font-size: 16px;
   font-weight: bold;
-  text-align: center;
+  color: #00AFB7 !important;
+  border-bottom-color: #00AFB7 !important;
 }
 .container .filter-bar .more-btn {
   position: relative;

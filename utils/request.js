@@ -1,17 +1,36 @@
+import {
+  watch
+} from './util.js'
 // const baseUrl = 'http://192.168.0.69:8005'
 const baseUrl = 'https://manage.bangzhuanwang.com/api'
 
-export const request = ({
+const onAppReady = () => {
+  return new Promise(function (resolve, reject) {
+    let app = getApp()
+    const getAppAfterLaunch = setInterval(() => {
+      if (!app) {
+        app = getApp()
+      } else {
+        resolve(app)
+        clearInterval(getAppAfterLaunch)
+      }
+    }, 10);
+  })
+}
+
+export async function request({
   method = 'get',
   url,
   data = {},
   header = {},
-  complete
-}) => {
-
-  return new Promise(function (resolve, reject) {
-    header = Object.assign({
-      Authorization: getApp().globalData.token
+  complete,
+  noToken=false
+}) {
+  return new Promise(async function (resolve, reject) {
+    let app=await onAppReady()
+    let Authorization = noToken?'':await app.getToken()
+    let header = Object.assign({
+      Authorization
     })
     wx.request({
       url: baseUrl + url,
