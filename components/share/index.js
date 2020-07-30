@@ -107,9 +107,9 @@ Component({
     draw() {
       wx.showLoading()
       const { userInfo, canvasWidth, canvasHeight } = this.data
-      const { avatarUrl, nickName } = userInfo
-      const avatarPromise = getImageInfo(avatarUrl)
-      const backgroundPromise = getImageInfo('https://img.xiaomeipingou.com/_assets_home-share-bg.jpg')
+      const { avatarUrl,nickName} = userInfo
+      const avatarPromise = getImageInfo('https://manage.bangzhuanwang.com/hello.jpg')
+      const backgroundPromise = getImageInfo('https://manage.bangzhuanwang.com/hello.jpg')
 
       Promise.all([avatarPromise, backgroundPromise])
         .then(([avatar, background]) => {
@@ -117,7 +117,7 @@ Component({
 
           const canvasW = rpx2px(canvasWidth * 2)
           const canvasH = rpx2px(canvasHeight * 2)
-
+          console.log(background)
           // 绘制背景
           ctx.drawImage(
             background.path,
