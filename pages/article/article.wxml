@@ -1,18 +1,19 @@
 <!--pages/article/article.wxml-->
+<wxs module="formatter" src="../../filter/formatter.wxs"></wxs>
 <view class="container">
 <i-spin fix wx:if="{{loading}}"></i-spin>
 	<!-- <scroll-view scroll-y style="height:100%;"> -->
 		<view class="article">
 			<text class="title">{{title}}</text>
 			<text class="sub">专利创新推送中心   {{createTime}}</text>
-			<rich-text nodes="{{htmlSnip}}"></rich-text>
+			<rich-text nodes="{{content}}"  bindtap='onRichTextClick'></rich-text>
 		</view>
-		<view class="related">
+		<view class="related" wx:if="{{related.length}}">
 			<text>相关推荐</text>
-			<view  wx:for="{{3}}" >
-					<text>视频世界互联网大会红利 释放桐乡互联网产业…</text>
-					<text>全新一代数据可视化解决方案，致力于提供一套简单方便、专业可靠、无限可能的数据可视化最佳实践。</text>
-			  	<text>21:36</text>
+			<view  wx:for="{{related}}" wx:key="related" bindtap="go2Article" data-id="{{item.id}}">
+					<text>{{item.title}}</text>
+					<text>{{item.brief}}</text>
+			  	<text>{{item.createTime}}</text>
 			</view>
 		</view>
 	<!-- </scroll-view> -->

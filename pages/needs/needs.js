@@ -1,60 +1,125 @@
 // pages/needs/needs.js
-import { getAreaPool,getRealmPool,setFavorite } from '../../api'
+import {
+  getAreaPool,
+  getRealmPool,
+  setFavorite
+} from '../../api'
+const app=getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    area:[],
-    realm:[],
-    loading:false
+    area: [],
+    realm: [],
+    loading: false
   },
-  onChange(event){
-    const {detail} = event
-    const {type}=event.currentTarget.dataset
+  onChange(event) {
+    const {
+      detail
+    } = event
+    const {
+      type
+    } = event.currentTarget.dataset
     this.setData({
-        [`${type}[${event.detail.name}].checked`] : detail.checked
+      [`${type}[${event.detail.name}].checked`]: detail.checked
     })
   },
-  doSubmit:function(){
-    let cityCodes=[]
-    let realmIds=[]
-    this.data.area.filter(item=>{
+  doSubmit: function () {
+    let cityCodes = []
+    let realmIds = []
+    this.data.area.filter(item => {
       return item.checked
-    }).map(item=>{
+    }).map(item => {
       cityCodes.push(item.code)
     })
-    this.data.realm.filter(item=>{
+    this.data.realm.filter(item => {
       return item.checked
-    }).map(item=>{
+    }).map(item => {
       realmIds.push(item.id)
     })
+    if(!cityCodes.length||!realmIds.length){
+      wx.showToast({
+        title: '请选择一个或以上领域或地域',
+        icon: 'none',
+        duration: 2000
+      })
+      return false
+    }
     setFavorite({
       cityCodes,
       realmIds
+    }).then(res=>{
+      if(res.code===80200){
+        app.globalData.userInfo.ownedCities=this.data.area.filter(item => {
+          return item.checked
+        })
+        app.globalData.userInfo.ownedRealms=this.data.realm.filter(item => {
+          return item.checked
+        })
+        app.globalData.hasChangeTags=true
+        wx.navigateBack({
+          delta: 1
+        })
+        wx.showToast({
+          title: '设置成功',
+          icon: 'success',
+          duration: 2000
+        })
+
+      }
     })
 
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad:async function (options) {
+  onLoad: async function (options) {
     this.setData({
-      loading:true
+      loading: true
     })
-    let areaRawData=await getAreaPool({
-      size:999
+    let areaRawData = await getAreaPool({
+      size: 999
     })
-    let realmRawData=await getRealmPool({
-      size:999
+    let realmRawData = await getRealmPool({
+      size: 999
     })
-    if(areaRawData.code===80200&&realmRawData.code){
+    if (areaRawData.code === 80200 && realmRawData.code === 80200) {
+      const app=getApp()
+      let areas
+      let realms
+      if(app.globalData.userInfo){
+        let ownedCities=app.globalData.userInfo.ownedCities||[]
+        let ownedRealms=app.globalData.userInfo.ownedRealms||[] 
+
+        areas=areaRawData.data.records
+        realms=realmRawData.data.records
+        ownedCities.map(item=>{
+              for(let index=0;index<areas.length;index++){
+                if(item.code===areas[index].code){
+                  areas[index].checked=true
+                  break
+                }
+              }
+          })
+
+          ownedRealms.map(item=>{
+            for(let index=0;index<realms.length;index++){
+              if(item.id===realms[index].id){
+                realms[index].checked=true
+                break
+              }
+            }
+        })
+      }
+
       this.setData({
-        loading:false,
-        area:areaRawData.data.records,
-        realm:realmRawData.data.records
+        loading: false,
+        area: areas,
+        realm: realms
       })
+
     }
   },
 

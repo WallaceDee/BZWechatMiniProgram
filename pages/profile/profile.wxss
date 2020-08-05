@@ -4,7 +4,14 @@
   box-shadow: none;
   font-size: 14px;
   padding: 0;
+  text-align: right;
 }
 .get-phone-btn:after {
   display: none;
+}
+.cell-footer {
+  min-width: 100px ;
+}
+.cell-footer picker {
+  width: 100px;
 }

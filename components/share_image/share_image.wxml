@@ -1,0 +1,3 @@
+<!-- <wxs src="../../mixins/wxs/proxy.wxs" module="proxywxs" /> -->
+
+<!-- <button class="btn" catchtap="saveImage">{{canvasData.btnText}}</button> -->

@@ -2,7 +2,8 @@
   "usingComponents": {
     "nav-bar": "/components/navbar/navbar",
     "i-cell-group": "/components/cell-group/index",
-    "i-cell": "/components/cell/index"
+    "i-cell": "/components/cell/index",
+    "i-spin": "/components/spin/index"
   },
   "navigationBarTitleText":"个人中心"
 }

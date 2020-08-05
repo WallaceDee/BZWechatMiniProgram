@@ -1,0 +1,8 @@
+<view bindtap="close" class="weui-mask {{show ? '' : 'weui-mask_hidden' }}" wx:if="{{mask}}"></view>
+
+<view wx:if="{{show}}" bindtap="close" class="weui-dialog__wrp {{extClass}}" style="opacity:{{loading?'0':'1'}}">
+	<view class="weui-dialog" catchtap="stopEvent">
+			<canvas canvas-id='image' style='width:{{canvasWidth}}px;height:{{canvasHeight}}px;border-radius: 12px;'></canvas>
+	</view>
+ 	<!-- <view class="success-tips"><text class="tips">已保存到相册，快去分享吧</text></view>  -->
+</view>

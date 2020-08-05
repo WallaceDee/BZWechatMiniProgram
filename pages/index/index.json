@@ -6,7 +6,7 @@
     "i-drawer": "/components/drawer/index",
     "i-spin": "/components/spin/index",
     "i-load-more": "/components/load-more/index",
-    "share": "/components/share/index",
+    "article-list": "/components/article-list/index",
     "mp-tabs":"/miniprogram_npm/@miniprogram-component-plus/tabs/index"
   },
   "navigationStyle": "custom"

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "article-list": "/components/article-list/index"
+  },
+  "navigationBarTitleText":"我的发送"
+}

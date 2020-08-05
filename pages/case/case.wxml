@@ -1,34 +1,12 @@
 <!--pages/case/case.wxml-->
 <view class="container">
-	<scroll-view class="article-list" scroll-y="true" style="height: 0;">
+	<scroll-view class="article-list {{loaded?'loaded':''}}" scroll-y="true" style="height: 0;">
 		<i-spin fix wx:if="{{loading}}"></i-spin>
-		<view class="section" wx:for="{{list}}" wx:key="index" wx:for-item="section">
-			<text>{{section.title}}</text>
-				<view class="item" wx:for="{{section.children}}" data-id="{{item.id}}" bindtap="go2Article">
-					<text>{{item.createTime}}</text>
-					<view>
-						<text class="title">{{item.title}}</text>
-						<text class="content">{{item.content}}</text>
-						<view class="buttons">
-							<view>
-								<image src="../../image/icon_collect.svg" />
-								<text>收藏</text>
-							</view>
-							<view>
-								<image src="../../image/icon_email.svg" />
-								<text>发送邮箱</text>
-							</view>
-							<button open-type="share" catchtap="catchShareTap">
-								<image src="../../image/icon_wechat.svg" />
-								<text>好友</text>
-							</button>
-							<view>
-								<image src="../../image/icon_moments.svg" />
-								<text>海报</text>
-							</view>
-						</view>
-					</view>
-				</view>
+		<article-list list="{{list}}"></article-list>
+		<view class="no-data">
+			<image src="../../image/no_content.svg"></image>
+			<text>暂无内容~</text>
 		</view>
+		<i-load-more i-loading-class="theme-loading" wx:if="{{!item.allLoaded}}" />
 	</scroll-view>
 </view>

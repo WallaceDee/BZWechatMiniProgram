@@ -1,24 +1,31 @@
-import {login,getLoginInfo} from './api'
-import {watch } from './utils/util.js'
+import {
+  login,
+  getLoginInfo
+} from './api'
+import {
+  watch
+} from './utils/util.js'
 App({
   globalData: {
-    ready:false,
+    code: '',
+    openId: '',
+    ready: false,
     statusBarHeight: wx.getSystemInfoSync()['statusBarHeight'],
     userInfo: null,
-    token:'',
-    loginInfo:null,
-    profileInfo:null
+    token: '',
+    loginInfo: null,
+    hasChangeTags: false
   },
-  getToken(){
-    return new Promise((resolve,reject)=>{
-        if(this.globalData.ready){
-          resolve(this.globalData.token)
-        }else{
-         watch(this.globalData,'ready',()=>{
+  getToken() {
+    return new Promise((resolve, reject) => {
+      if (this.globalData.ready) {
+        resolve(this.globalData.token)
+      } else {
+        watch(this.globalData, 'ready', () => {
           console.log(this.globalData.ready)
-           resolve(this.globalData.token)
-         })
-        }
+          resolve(this.globalData.token)
+        })
+      }
     })
   },
   onLaunch: function () {
@@ -35,6 +42,7 @@ App({
           errMsg,
           code
         } = res
+        this.globalData.code = code
         if (errMsg === 'login:ok') {
           console.log(res)
           // 获取用户信息
@@ -46,30 +54,38 @@ App({
                 wx.getUserInfo({
                   success: res => {
                     // 可以将 res 发送给后台解码出 unionId
-                    this.globalData.userInfo = res.userInfo
-                    res.userInfo.nickname=res.userInfo.nickName
+                    res.userInfo.nickname = res.userInfo.nickName
+                    res.userInfo.sex = res.userInfo.gender
+                    res.userInfo.headImg = res.userInfo.avatarUrl
+                    const {
+                      nickname,
+                      sex,
+                      headImg,
+                      city,
+                      province,
+                      country
+                    } = res.userInfo
                     login({
-                      ...res.userInfo,
+                      nickname,
+                      sex,
+                      headImg,
+                      city,
+                      province,
+                      country,
                       code
-                    }).then(res=>{
-                      if(res.code===80200){
-                        this.globalData.token='Bearer '+res.data['access_token']
-                        this.globalData.loginInfo=res.data.loginInfo
-                        this.globalData.ready=true
+                    }).then(res => {
+                      if (res.code === 80200) {
+                        this.globalData.token = 'Bearer ' + res.data['access_token']
+                        this.globalData.loginInfo = res.data.loginInfo
+                        this.globalData.openId = res.data.loginInfo.openId
+                        this.globalData.ready = true
                         getLoginInfo({
-                          openId:res.data.loginInfo.openId
-                        }).then(res=>{
-                          if(res.code===80200){
-                            this.globalData.profileInfo=res.data
+                          openId: this.globalData.openId
+                        }).then(res => {
+                          if (res.code === 80200) {
+                            this.globalData.userInfo = res.data
                             if (this.initReadyCallback) {
                               this.initReadyCallback(res)
-                            }
-                            const {ownedRealms,ownedCities}=res.data
-                            if(!ownedRealms.length&&!ownedCities.length){
-                              wx.navigateTo({
-                                url:'/pages/needs/needs',  //跳转页面的路径，可带参数 ？隔开，不同参数用 & 分隔；相对路径，不需要.wxml后缀
-                                success:function(){}        //成功后的回调；
-                              })
                             }
                           }
                         })
@@ -82,17 +98,16 @@ App({
                     }
                   }
                 })
-              }else{
+              } else {
+                this.globalData.ready = true
                 if (this.initReadyCallback) {
                   this.initReadyCallback(false)
                 }
               }
             }
           })
-
         }
       }
     })
-
   }
 })

@@ -34,3 +34,10 @@
   margin-left: 17px;
   margin-right: 10px;
 }
+.hot-search .title {
+  font-size: 15px;
+  padding-left: 15px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}

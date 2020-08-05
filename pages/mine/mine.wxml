@@ -1,11 +1,12 @@
 <!--pages/mine/mine.wxml-->
 <view class="container">
+	<i-spin fix wx:if="{{loading}}"></i-spin>
 	<view class="userInfo">
 		<!-- <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
 		<block wx:else> -->
 		<view style="position:relative;">
-			<image class="avatar" src="{{userInfo.avatarUrl?userInfo.avatarUrl:'../../image/default_avatar.png'}}" mode="cover"></image>
-			<view class="gender female">
+			<image class="avatar" src="{{userInfo.headImg?userInfo.headImg:'../../image/default_avatar.png'}}" mode="cover"></image>
+			<view hidden="{{!hasUserInfo}}" class="gender {{userInfo.sex===2?'female':''}}">
 				<image src="../../image/icon_male.svg"></image>
 				<image src="../../image/icon_female.svg"></image>
 			</view>
@@ -16,8 +17,8 @@
 			<view> <text class="company">点击登录  享受更多精彩信息</text></view>
 		</view>
 			<view wx:else>
-			<view> <text class="nickname">{{userInfo.nickName}}</text></view>
-			<view> <text class="company">帮专知识产权服务有限公司帮专知识产权服务有限公司帮专知识产权服务有限公司</text></view>
+			<view> <text class="nickname">{{userInfo.nickname}}</text></view>
+			<view> <text class="company" wx:if="{{userInfo.companyName}}">{{userInfo.companyName}}</text></view>
 			</view>
 		</view>
 		<!-- </block> -->
@@ -26,13 +27,13 @@
 		<i-cell title="我的信息" is-link bind:click="go2Profile">
 			<image class="icon" slot="icon" src="../../image/icon_user.svg"></image>
 		</i-cell>
-		<i-cell title="我的订阅" is-link>
+		<!-- <i-cell title="我的订阅" is-link>
 			<image class="icon" slot="icon" src="../../image/icon_subscribe.svg"></image>
-		</i-cell>
-		<i-cell title="我的收藏" is-link>
+		</i-cell> -->
+		<i-cell title="我的收藏" is-link  bind:click="go2Collocation">
 			<image class="icon" slot="icon" src="../../image/icon_heart.svg"></image>
 		</i-cell>
-		<i-cell title="我的发送" is-link>
+		<i-cell title="我的发送" is-link bind:click="go2Sent">
 			<image class="icon" slot="icon" src="../../image/icon_email_gray.svg"></image>
 		</i-cell>
 		<i-cell title="我的需求" is-link>

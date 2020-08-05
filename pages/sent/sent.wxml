@@ -1,0 +1,12 @@
+<!--pages/sent/sent.wxml-->
+<view class="container">
+	<scroll-view class="article-list {{loaded?'loaded':''}}" scroll-y="true" style="height: 0;">
+		<i-spin fix wx:if="{{loading}}"></i-spin>
+		<article-list list="{{list}}" is-tree="{{false}}"></article-list>
+		<view class="no-data">
+			<image src="../../image/no_content.svg"></image>
+			<text>暂无内容~</text>
+		</view>
+		<i-load-more i-loading-class="theme-loading" wx:if="{{!item.allLoaded}}" />
+	</scroll-view>
+</view>

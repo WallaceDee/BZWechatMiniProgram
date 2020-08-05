@@ -1,6 +1,3 @@
-import {
-  watch
-} from './util.js'
 // const baseUrl = 'http://192.168.0.69:8005'
 const baseUrl = 'https://manage.bangzhuanwang.com/api'
 
@@ -27,8 +24,11 @@ export async function request({
   noToken=false
 }) {
   return new Promise(async function (resolve, reject) {
+    wx.showLoading({
+      title: '加载中',
+    })
     let app=await onAppReady()
-    let Authorization = noToken?'':await app.getToken()
+    let Authorization = noToken?'':app.globalData.token
     let header = Object.assign({
       Authorization
     })
@@ -39,6 +39,7 @@ export async function request({
       header,
       complete,
       success(res) {
+        wx.hideLoading()
         try {
           resolve(res.data);
         } catch (error) {
@@ -46,6 +47,7 @@ export async function request({
         }
       },
       fail(err) {
+        wx.hideLoading()
         reject(err)
       }
     })

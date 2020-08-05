@@ -1,18 +1,35 @@
 <!--pages/profile/profile.wxml-->
 <view class="container">
 	<i-cell-group>
-		<i-cell title="昵称" value="{{userInfo.nickname}}" onlyTapFooter is-link bind:click="edit"></i-cell>
-		<i-cell title="性别" is-link><picker  slot="footer" range="{{gender}}" range-key="label">{{userInfo.gender===1?'男':userInfo.gender===2?'女':'未知'}}</picker></i-cell>
-		<i-cell title="手机号码" is-link>
-				<button class="get-phone-btn" slot="footer" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">点击设置</button>
+	<!-- onlyTapFooter is-link bind:click="openEditDialog" data-field="nickname" data-title="昵称" data-value="{{userInfo.nickname}}" -->
+		<i-cell title="昵称" >
+			<view slot="footer" class="cell-footer">
+				{{userInfo.nickname}}
+			</view>
 		</i-cell>
-		<i-cell title="邮箱" value="447363121@qq.com" is-link  onlyTapFooter bind:click="edit"></i-cell>
+		<!-- is-link -->
+		<i-cell title="性别" >
+			<view slot="footer" class="cell-footer">
+				<picker range="{{gender}}" range-key="label">{{userInfo.sex===1?'男':userInfo.sex===2?'女':'未知'}}</picker>
+			</view>
+		</i-cell>
+		<i-cell title="手机号码" is-link="{{!userInfo.phoneNumber}}">
+			<view slot="footer" class="cell-footer">
+				<text wx:if="{{userInfo.phoneNumber}}">{{userInfo.phoneNumber}}</text>
+				<button wx:else class="get-phone-btn" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">点击设置</button>
+			</view>
+		</i-cell>
+		<i-cell title="邮箱" is-link="{{!userInfo.accountEmail}}" onlyTapFooter bind:click="openEditDialog" data-field="accountEmail" data-title="邮箱" data-value="{{userInfo.accountEmail}}">
+			<view slot="footer" class="cell-footer">
+				{{userInfo.accountEmail?userInfo.accountEmail:'点击设置'}}
+			</view>
+		</i-cell>
 		<i-cell title="领域" value="美术" is-link></i-cell>
 		<i-cell title="单位" value="帮专知识产权服务有限公司" is-link></i-cell>
 		<i-cell title="职位" value="美术老师" is-link></i-cell>
 	</i-cell-group>
-	<i-modal title="修改" visible="{{ modalVisible }}" bind:ok="onOkClick" bind:cancel="onCancel">
-			  <i-input value="{{ value1 }}" autofocus placeholder="名字" />
-</i-modal>
+	<mp-dialog title="{{dialog.title}}" show="{{ dialog.visible }}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
+		<input bindinput="bindKeyInput" value="{{ dialog.value }}" placeholder="{{dialog.placeholder}}" />
+	</mp-dialog>
 
 </view>

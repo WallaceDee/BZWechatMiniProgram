@@ -2,6 +2,7 @@
 import {
   getCaseList
 } from '../../api'
+import {onShareArticleMessage} from '../../utils/util'
 Page({
 
   /**
@@ -14,14 +15,6 @@ Page({
     loading:false,
     page:1,
     size:20
-  },
-  go2Article(event) {
-    const {
-      id
-    } = event.currentTarget.dataset
-    wx.navigateTo({
-      url: `../article/article?id=${id}`
-    })
   },
   getCaseList(){
     if(this.data.allLoaded||this.data.loading){
@@ -111,7 +104,5 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
-  }
+  onShareAppMessage:onShareArticleMessage
 })

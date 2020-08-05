@@ -21,6 +21,8 @@
   "homepage": "https://github.com/WallaceDee/BZWechatMiniProgram#readme",
   "dependencies": {
     "@miniprogram-component-plus/tabs": "^1.0.0",
-    "weui-miniprogram": "^1.0.4"
+    "lodash": "^4.17.19",
+    "weui-miniprogram": "^1.0.4",
+    "wxa-plugin-canvas": "^1.1.12"
   }
 }

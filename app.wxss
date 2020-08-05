@@ -1,0 +1,38 @@
+@import '/miniprogram_npm/weui-miniprogram/weui-wxss/dist/style/weui.wxss';
+page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  flex: 1;
+}
+.article-list {
+  flex: 1;
+  position: relative;
+}
+.article-list .no-data {
+  display: none;
+  position: absolute;
+  width: 114px;
+  text-align: center;
+  color: #999;
+  font-size: 13px;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+.article-list .no-data > image {
+  width: 114px;
+  height: 114px;
+}
+.article-list.loaded article-list:empty + .no-data {
+  display: block;
+}
+.theme-loading {
+  border-color: #e9eaec #e9eaec #e9eaec #00AFB7 !important;
+}

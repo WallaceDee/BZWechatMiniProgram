@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "share-image": "/components/share_image/share_image",
+    "popup": "/components/popup/popup",
+    "modal": "/components/popup/popup"
+  }
+}

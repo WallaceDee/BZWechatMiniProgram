@@ -1,23 +1,48 @@
 // pages/search/search.js
+import {debounce} from '../../utils/util'
+import {
+  getArticleList,
+  getHotKeyword
+} from '../../api'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    keyword:''
+    keyword:'',
+    hotKeywords:[]
   },
+  onSearchInput:debounce(
+    function(event){
+      const  {value, cursor, keyCode}=event.detail
+      console.log({value, cursor, keyCode})
+
+
+
+
+    },500,false
+  ),
   onCancel:function(){
     wx.navigateBack({
       delta: 1
     })
-    
+  },
+  getHotKeyword(){
+    getHotKeyword().then(res=>{
+      console.log(res)
+      if(res.code===80200){
+        this.setData({
+          hotKeywords:res.data
+        })
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getHotKeyword()
   },
 
   /**

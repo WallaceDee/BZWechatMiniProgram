@@ -2,7 +2,17 @@
 <view class="search-bar">
 	<view class="keyword-wrapper">
 		<image src="../../image/icon_search.svg"></image>
-		<input class="keyword" value="{{ keyword }}" placeholder="搜索关键字" />
+		<input bindinput="onSearchInput" class="keyword" value="{{ keyword }}" placeholder="搜索关键字" />
 	</view>
 	<button class="cancel-btn" bindtap="onCancel">取消</button>
+</view>
+<view class="container">
+	<view class="hot-search">
+		<view class="title">
+			<text >热门搜索</text>
+		</view>
+		<i-cell-group>
+			<i-cell title="{{item.value}}" wx:for="{{hotKeywords}}" wx:key="keyword"></i-cell>
+		</i-cell-group>
+</view>
 </view>

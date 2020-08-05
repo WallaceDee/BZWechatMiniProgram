@@ -1,4 +1,5 @@
 // pages/profile/profile.js
+import {decryptPhoneNumber,updateUserInfo} from '../../api'
 const app = getApp()
 const genderMapping = new Map([
   [1, '男'],
@@ -11,8 +12,14 @@ Page({
    * 页面的初始数据
    */
   data: {
+    buttons: [{text: '取消',type:'cancel'}, {text: '确定',type:'ok'}],
     genderMapping,
-    modalVisible:false,
+    dialog:{
+      visible:false,
+      title:'',
+      placeholder:'',
+      value:''
+    },
     userInfo:null,
     gender:[{
       label:'男',
@@ -22,22 +29,67 @@ Page({
       value:2
     }]
   },
-  edit:function(){
+  tapDialogButton(e) {
+    const {type}=e.detail.item
+    if(type==='ok'){
+      const{
+        field,
+        value
+      }=this.data.dialog
+      let params={
+        id:app.globalData.userInfo.id
+      }
+      params[field]=value
+      updateUserInfo(params).then(res=>{
+        this.closeDialog()
+        this.setData({
+          userInfo:Object.assign(this.data.userInfo,params)
+        })
+      })
+    }else{
+      this.closeDialog()
+    }
+},
+bindKeyInput: function (e) {
+  this.setData({
+    dialog:Object.assign(this.data.dialog,{
+      value: e.detail.value
+    })
+  })
+},
+openEditDialog:function(e){
+    // console.log(e)
+    const {field,title,value}=e.currentTarget.dataset
     this.setData(
       {
-        modalVisible:true
+        dialog:{
+          field,
+          visible:true,
+          placeholder:'请输入'+title,
+          title:'修改'+title,
+          value
+        }
       }
     )
   },
-  onCancel:function(){
+  closeDialog:function(){
     this.setData({
-      modalVisible:false
+      dialog:{visible:false}
     })
   },
   getPhoneNumber (e) {
-    console.log(e)
-    console.log(e.detail.iv)
-    console.log(e.detail.encryptedData)
+    const {openId}=app.globalData
+    const {encryptedData,iv}=e.detail
+    decryptPhoneNumber({
+      encryptedData,iv,openId
+    }).then(res=>{
+      if(res.code===80200){
+        app.globalData.userInfo.phoneNumber=res.data.phoneNumber
+        this.setData({
+          userInfo:Object.assign({phoneNumber:res.data.phoneNumber},this.data.userInfo)
+        })
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -93,7 +145,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
 
-  }
+  // }
 })

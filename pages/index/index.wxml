@@ -1,16 +1,15 @@
 <nav-bar custom>
-	<i-tabs scroll i-class="nav-tabs" current="{{ current }}" bind:change="onHeaderTabChange">
-		<i-tab wx:for="{{headerTabs}}" key="{{item.name}}" title="{{item.label}}" i-class="nav-tab" i-tab-title-class="nav-title" i-tab-title-current="nav-title-active" i-tab-underline="no-underline"></i-tab>
+	<i-tabs scroll  i-class="nav-tabs" current="{{ current }}" bind:change="onHeaderTabChange">
+		<i-tab wx:key="navTab" wx:for="{{headerTabs}}" key="{{item.name}}" title="{{item.label}}" i-class="nav-tab" i-tab-title-class="nav-title" i-tab-title-current="nav-title-active" i-tab-underline="no-underline"></i-tab>
 	</i-tabs>
 </nav-bar>
 <view class="container">
-
-
 	<view class="banner">
-		<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-			<block wx:for="{{background}}" wx:key="*this">
-				<swiper-item>
-					<view class="swiper-item {{item}}"></view>
+		<swiper indicator-dots="{{banners.length>1}}" autoplay interval="{{10000}}" duration="{{50}}">
+			<block wx:for="{{banners}}" wx:key="banner">
+				<swiper-item bindtap="onSwiperClick" data-type="{{item.type}}" data-url="{{item.url}}" data-article-id="{{item.articleId}}">
+					<view class="swiper-item" style="background-image:url({{item.img}})">
+					</view>
 				</swiper-item>
 			</block>
 		</swiper>
@@ -23,40 +22,9 @@
 		<mp-tabs ext-class="filter-tabs" tabs="{{tagTabs[current]}}" activeTab="{{activeTab[current]}}" swiperClass="weui-tabs-swiper" bindtabclick="onTagTabChange" activeClass="tab-bar-title__selected"></mp-tabs>
 		<view class="more-btn" bindtap="go2Category"></view>
 	</view>
-	<scroll-view class="article-list {{item.loaded?'loaded':''}}" scroll-y="true" style="height: 0;" bindscrolltolower="getArticleList" wx:for="{{list[current]}}" hidden="{{index!==activeTab[current]}}">
-	<!-- <scroll-view class="article-list {{loaded?'loaded':''}}" scroll-y="true" style="height: 0;" bindscrolltolower="getArticleList" > -->
-		<!-- <share visible></share> -->
+	<scroll-view wx:for="{{list[current]}}" hidden="{{index!==activeTab[current]}}" class="article-list {{item.loaded?'loaded':''}}" wx:key="scroll" scroll-y="true" style="height: 0;" bindscrolltolower="getArticleList" >
 		<i-spin fix wx:if="{{loading}}"></i-spin>
-		<view class="section" wx:for="{{item.data}}" wx:key="index" wx:for-item="section">
-			<block>
-				<text>{{section.title}}</text>
-				<view class="item" wx:for="{{section.children}}" data-id="{{item.id}}" bindtap="go2Article">
-					<text>{{item.createTime}}</text>
-					<view>
-						<text class="title">{{item.title}}</text>
-						<text class="content">{{item.content}}</text>
-						<view class="buttons">
-							<view>
-								<image src="../../image/icon_collect.svg" />
-								<text>收藏</text>
-							</view>
-							<view>
-								<image src="../../image/icon_email.svg" />
-								<text>发送邮箱</text>
-							</view>
-							<button open-type="share" catchtap="catchShareTap">
-								<image src="../../image/icon_wechat.svg" />
-								<text>好友</text>
-							</button>
-							<view>
-								<image src="../../image/icon_moments.svg" />
-								<text>海报</text>
-							</view>
-						</view>
-					</view>
-				</view>
-			</block>
-		</view>
+		<article-list list="{{item.data}}" ></article-list>
 		<view class="no-data">
 			<image src="../../image/no_content.svg"></image>
 			<text>暂无内容~</text>

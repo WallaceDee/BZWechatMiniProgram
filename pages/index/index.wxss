@@ -9,6 +9,11 @@
 .container .banner swiper-item {
   background-color: #eee;
 }
+.container .banner swiper-item .swiper-item {
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+}
 .container .filter-bar {
   position: relative;
   height: 46px;

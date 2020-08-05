@@ -1,0 +1,23 @@
+var formatter = {
+  getDate: function (time, formatter) {
+    var date=getDate(time)
+    var year = date.getFullYear()
+    var month = date.getMonth() + 1
+    var day = date.getDate()
+    var hour = date.getHours()
+    var minute = date.getMinutes()
+    var second = date.getSeconds()
+    var formatNumber = function(n){
+      n = n.toString()
+      return n[1] ? n : '0' + n
+    }
+    return  [hour, minute].map(formatNumber).join(':')
+   }
+ }
+ function userAvatar(avatar) {
+  if (!avatar) return 'https://avatars0.githubusercontent.com/u/28439412?s=460&v=4'
+  return avatar;
+}
+ module.exports = {
+   getDate: formatter.getDate
+ }

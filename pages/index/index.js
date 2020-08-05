@@ -1,7 +1,11 @@
 // pages/index/index.js
 import {
-  getArticleList
+  getArticleList,
+  getBannerList,
+  getRealmPool,
+  getAreaPool
 } from '../../api'
+import {onShareArticleMessage} from '../../utils/util'
 //获取应用实例
 const app = getApp()
 Page({
@@ -10,6 +14,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    banners: [{}],
     activeTab: {
       realm: 0,
       area: 0
@@ -27,23 +32,32 @@ Page({
       area: [],
     },
     list: {
-      realm:[],
-      area:[]
+      realm: [],
+      area: []
     },
     loading: false,
     loaded: false,
     allLoaded: false,
     page: 1,
     size: 20,
-    navHeight: 40,
-    currentIndex: 0,
-    background: ['demo-text-1', 'demo-text-2', 'demo-text-3'],
-    indicatorDots: true,
-    vertical: false,
-    autoplay: false,
-    interval: 2000,
-    duration: 500,
-    currentFilterKeyword: 'filter1'
+    navHeight: 40
+  },
+  onSwiperClick(e) {
+    console.log(e)
+    const {
+      type,
+      url,
+      articleId
+    } = e.currentTarget.dataset
+    if (type === 1 || type === 2) {
+      wx.navigateTo({
+        url: '/pages/article/article?id=' + articleId
+      })
+    } else if (type === 3) {
+      wx.navigateTo({
+        url: '/pages/webview/webview?url=' + encodeURIComponent(url)
+      })
+    }
   },
   onTagTabChange(e) {
     const index = e.detail.index
@@ -76,38 +90,46 @@ Page({
   },
   go2Search() {
     wx.navigateTo({
-      url: '../search/search'
+      url: '/pages/search/search'
     })
   },
   go2Category() {
     wx.navigateTo({
-      url: '../category/category'
+      url: '/pages/needs/needs'
     })
   },
-  catchShareTap() {
-    console.log(1)
-  },
-  go2Article(event) {
-    const {
-      id
-    } = event.currentTarget.dataset
-    wx.navigateTo({
-      url: `../article/article?id=${id}`
+  getBannerList() {
+    getBannerList().then(res => {
+      console.log(res)
+      if (res.code === 80200) {
+        this.setData({
+          banners: res.data.records
+        })
+      }
     })
   },
   getArticleList() {
-    let currentData=this.data.list[this.data.current]
-    let dataIndex=this.data.activeTab[this.data.current]
-    let currentTabData=currentData[dataIndex]=currentData[dataIndex]||{data:[],page:1,allLoaded:false,loading:false,loaded:false}
-    const {loading,allLoaded} =currentTabData
+    let currentData = this.data.list[this.data.current]
+    let dataIndex = this.data.activeTab[this.data.current]
+    let currentTabData = currentData[dataIndex] = currentData[dataIndex] || {
+      data: [],
+      page: 1,
+      allLoaded: false,
+      loading: false,
+      loaded: false
+    }
+    const {
+      loading,
+      allLoaded
+    } = currentTabData
     if (loading || allLoaded) {
       return false
     }
-    currentTabData.loading=true
+    currentTabData.loading = true
     this.setData({
-      list:this.data.list
+      list: this.data.list
     })
-    const current=currentTabData.page
+    const current = currentTabData.page
     let params = {
       current,
       size: this.data.size
@@ -118,70 +140,76 @@ Page({
       params.cityCodes = [this.data.tagTabs[this.data.current][this.data.activeTab[this.data.current]].code]
     }
     getArticleList(params).then(res => {
-      currentData[dataIndex].loading=false
-      currentData[dataIndex].loaded=true
+      currentData[dataIndex].loading = false
+      currentData[dataIndex].loaded = true
       this.setData({
         list: this.data.list
       })
       if (res.code === 80200) {
-        currentData[dataIndex]={
-          loaded:true,
+        currentData[dataIndex] = {
+          loaded: true,
           data: currentTabData.data.concat(res.data.records),
-          page:currentTabData.page+1
+          page: currentTabData.page + 1
         }
         if (currentData[dataIndex].data.length >= res.data.total || !res.data.records.length) {
-            currentData[dataIndex].allLoaded=true
+          currentData[dataIndex].allLoaded = true
         }
-        if(this.data.current==='realm'){
-        this.setData({
-          list:Object.assign(this.data.list,{
-            realm:currentData
+        if (this.data.current === 'realm') {
+          this.setData({
+            list: Object.assign(this.data.list, {
+              realm: currentData
+            })
           })
-        })
-      }else{
-        this.setData({
-          list:Object.assign(this.data.list,{
-            area:currentData
+        } else {
+          this.setData({
+            list: Object.assign(this.data.list, {
+              area: currentData
+            })
           })
-        })
-      }
+        }
       }
     })
   },
-  handleFilterChange({
-    detail
-  }) {
-    this.setData({
-      currentFilterKeyword: detail.key
-    });
+  init: async function () {
+    this.getBannerList()
+    var ownedRealms=[]
+    var ownedCities=[]
+    if (app.globalData.userInfo) {
+      ownedRealms = app.globalData.userInfo.ownedRealms
+      ownedCities = app.globalData.userInfo.ownedCities
+    }
+    
+    if(!ownedRealms.length||!ownedCities.length){
+      let tempRawData = await getAreaPool()
+      ownedCities = tempRawData.data.records
+      tempRawData = await getRealmPool()
+      ownedRealms = tempRawData.data.records
+    }
+    if (ownedRealms.length || ownedCities.length) {
+      ownedRealms.map(item => {
+        item.title = item.realmName
+      })
+      ownedCities.map(item => {
+        item.title = item.name
+      })
+      this.setData({
+        tagTabs: {
+          realm: ownedRealms,
+          area: ownedCities
+        }
+      })
+      this.getArticleList()
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     if (app.globalData.ready) {
-      this.getArticleList()
+      this.init()
     } else {
       app.initReadyCallback = res => {
-        const {
-          ownedRealms,
-          ownedCities
-        } = app.globalData.profileInfo
-        if (ownedRealms.length || ownedCities.length) {
-          ownedRealms.map(item => {
-            item.title = item.realmName
-          })
-          ownedCities.map(item => {
-            item.title = item.name
-          })
-          this.setData({
-            tagTabs: {
-              realm: ownedRealms,
-              area: ownedCities
-            }
-          })
-          this.getArticleList()
-        }
+        this.init()
       }
     }
   },
@@ -197,11 +225,29 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (typeof this.getTabBar === 'function' &&
-      this.getTabBar()) {
-      this.getTabBar().setData({
-        selected: 0
-      })
+    if(app.globalData.hasChangeTags){
+      app.globalData.hasChangeTags=false
+      var ownedRealms = app.globalData.userInfo.ownedRealms
+      var ownedCities = app.globalData.userInfo.ownedCities
+      if (ownedRealms.length || ownedCities.length) {
+        ownedRealms.map(item => {
+          item.title = item.realmName
+        })
+        ownedCities.map(item => {
+          item.title = item.name
+        })
+        this.setData({
+          list:{
+            realm: [],
+            area: []
+          },
+          tagTabs: {
+            realm: ownedRealms,
+            area: ownedCities
+          }
+        })
+        this.getArticleList()
+      }
     }
   },
 
@@ -236,7 +282,5 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
-  }
+  onShareAppMessage:onShareArticleMessage
 })

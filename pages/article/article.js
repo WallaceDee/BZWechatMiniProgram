@@ -3,7 +3,9 @@
 const app = getApp()
 
 import {
-  getArticle
+  getArticle,
+  getArticleByArticleNo,
+  getRelatedArticles
 } from '../../api'
 Page({
 
@@ -11,35 +13,80 @@ Page({
    * 页面的初始数据
    */
   data: {
-    loading:true,
-    htmlSnip:'',
-    title:'',
-    createTime:''
+    loading: true,
+    content: '',
+    title: '',
+    createTime: '',
+    related: []
+  },
+  onRichTextClick(e) {
+    console.log(e)
+  },
+  go2Article: function (event) {
+    const {
+      id
+    } = event.currentTarget.dataset
+    wx.navigateTo({
+      url: `/pages/article/article?id=${id}`
+    })
+  },
+  getRelatedArticles(data) {
+    getRelatedArticles(data).then(res => {
+      if (res.code === 80200) {
+        this.setData({
+          related: res.data.records
+        })
+      }
+    })
+  },
+  getArticleByArticleNo: function (articleNo) {
+    getArticleByArticleNo({
+      articleNo
+    }).then(res => {
+      this.getDetailCallbackres(res)
+    })
   },
   getArticle: function (id) {
     getArticle({
       id
-    }).then(res=>{
-      if(res.code===80200){
-        const {content,title,createTime}=res.data
-        this.setData({
-          htmlSnip:res.data.content,
-          title,
-          createTime
-        })
-        this.setData({
-          loading:false
-        })
-        wx.hideLoading()
-      }
+    }).then(res => {
+      this.getDetailCallbackres(res)
     })
+  },
+  getDetailCallbackres(res) {
+    if (res.code === 80200) {
+      let {
+        content,
+        title,
+        createTime
+      } = res.data
+      wx.setNavigationBarTitle({
+        title
+      })
+      content = content.replace(/<img/g, '<img style="max-width:100%;height:auto;display:block;margin:10px 0;"')
+      this.setData({
+        content,
+        title,
+        createTime
+      })
+      this.setData({
+          loading: false
+        }) |
+        this.getRelatedArticles({
+          id: res.data.id,
+          size: 3
+        })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-     console.log(options)
-     this.getArticle(options.id)
+    if (options.articleNo) {
+      this.getArticleByArticleNo(options.articleNo)
+    } else {
+      this.getArticle(options.id)
+    }
   },
 
   /**

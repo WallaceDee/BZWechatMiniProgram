@@ -1,0 +1,36 @@
+<!--components/article-list/index.wxml-->
+<wxs module="formatter" src="../../filter/formatter.wxs"></wxs>
+<popup wx:if="{{list.length}}" show="{{posterVisible}}" imgData="{{imgData}}" article="{{article}}" userInfo="{{userInfo}}">
+</popup>
+<view class="section" wx:for="{{isTree?list:[{children:list}]}}" wx:key="index" wx:for-item="section" wx:for-index="sectionIndex">
+	<block>
+		<text class="time-title" wx:if="{{isTree}}">{{section.title}}</text>
+		<view class="item" wx:for="{{section.children}}" wx:key="article" data-id="{{item.id}}" data-type="{{item.type}}" bindtap="go2Article" wx:for-index="itemIndex">
+			<text class="time" wx:if="{{isTree}}" >{{formatter.getDate(item.createTime,'hh:ss')}}</text>
+			<view class="article">
+				<text class="title">{{item.title}}</text>
+				<text class="time no-dot"  wx:if="{{!isTree}}">{{item.createTime}}</text>
+				<text class="content">{{item.brief}}</text>
+				<view class="buttons">
+					<view class="button" catchtap="collect" data-article-id="{{item.id}}" data-status="{{item.checked}}" data-section-index="{{sectionIndex}}" data-item-index="{{itemIndex}}">
+						<image class="icon" wx:if="{{item.checked}}" src="../../image/icon_collect_HL.svg" />
+						<image class="icon" wx:else src="../../image/icon_collect.svg" />
+						<text class="button-text"><block wx:if="{{item.checked}}">已</block>收藏</text>
+					</view>
+					<view class="button" catchtap="sendEmail" data-article-id="{{item.id}}">
+						<image class="icon" src="../../image/icon_email.svg" />
+						<text class="button-text">发送邮箱</text>
+					</view>
+					<button class="button share-btn" open-type="share" catchtap="catchShareTap" data-title="{{item.title}}" data-article-id="{{item.id}}" data-cover="{{item.articleImg}}">
+						<image class="icon" src="../../image/icon_wechat.svg" />
+						<text class="button-text">好友</text>
+					</button>
+					<view class="button" catchtap="openPoster" data-title="{{item.title}}" data-article-no="{{item.articleNo}}" data-cover="{{item.articleImg}}">
+						<image class="icon" src="../../image/icon_moments.svg" />
+						<text class="button-text">海报</text>
+					</view>
+				</view>
+			</view>
+		</view>
+	</block>
+</view>

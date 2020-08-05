@@ -8,13 +8,13 @@
 		"es6": true,
 		"enhance": true,
 		"postcss": true,
-		"preloadBackgroundData": true,
+		"preloadBackgroundData": false,
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
 		"nodeModules": true,
-		"autoAudits": true,
-		"showShadowRootInWxmlPanel": true,
+		"autoAudits": false,
+		"showShadowRootInWxmlPanel": false,
 		"scopeDataCheck": false,
 		"uglifyFileName": false,
 		"checkInvalidKey": true,
@@ -66,16 +66,16 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/needs/needs",
-					"pathName": "pages/needs/needs",
+					"name": "pages/search/search",
+					"pathName": "pages/search/search",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": 1,
-					"name": "pages/index/index",
-					"pathName": "pages/index/index",
-					"query": "",
+					"name": "pages/article/article",
+					"pathName": "pages/article/article",
+					"query": "id=0521b32192be4142bb5d360ebfc88fc6",
 					"scene": null
 				}
 			]
