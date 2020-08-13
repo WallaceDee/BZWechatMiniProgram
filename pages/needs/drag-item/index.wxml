@@ -1,0 +1,6 @@
+<view>
+		<view class="item">
+		<view class="inner"> 	<text class="label">{{itemData.realmName||itemData.name}}</text> </view>
+		<view class="delete-btn" catchtap="deleteItem" data-id="{{itemData.id}}"></view>
+		</view>
+</view>

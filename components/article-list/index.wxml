@@ -2,11 +2,11 @@
 <wxs module="formatter" src="../../filter/formatter.wxs"></wxs>
 <popup wx:if="{{list.length}}" show="{{posterVisible}}" imgData="{{imgData}}" article="{{article}}" userInfo="{{userInfo}}">
 </popup>
-<view class="section" wx:for="{{isTree?list:[{children:list}]}}" wx:key="index" wx:for-item="section" wx:for-index="sectionIndex">
+<view class="section {{isTree?'is-tree':'list'}}" wx:if="{{list.length}}" wx:for="{{isTree?list:[{children:list}]}}" wx:key="index" wx:for-item="section" wx:for-index="sectionIndex">
 	<block>
 		<text class="time-title" wx:if="{{isTree}}">{{section.title}}</text>
 		<view class="item" wx:for="{{section.children}}" wx:key="article" data-id="{{item.id}}" data-type="{{item.type}}" bindtap="go2Article" wx:for-index="itemIndex">
-			<text class="time" wx:if="{{isTree}}" >{{formatter.getDate(item.createTime,'hh:ss')}}</text>
+			<text class="time" wx:if="{{isTree}}" >{{createHour||formatter.getDate(item.createTime,'hh:ss')}}</text>
 			<view class="article">
 				<text class="title">{{item.title}}</text>
 				<text class="time no-dot"  wx:if="{{!isTree}}">{{item.createTime}}</text>

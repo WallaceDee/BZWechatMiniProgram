@@ -2,18 +2,43 @@
 
 <view class="container">
 	<i-spin fix wx:if="{{loading}}"></i-spin>
-	<view class="tags-wrapper">
-		<view><text>领域</text></view>
-		<i-tag data-type="realm" wx:for="{{realm}}" wx:key="index" bindchange="onChange" checkable="{{true}}" name="{{index}}" color="green" checked="{{item.checked}}" type="border" style="margin-right:5px;">
-			{{item.realmName}}
-		</i-tag>
+
+	<view class="section-wrapper" hidden="{{type!=='realm'}}">
+		<view class="title">
+			<text>已选领域</text>
+			<text class="tips">长按可拖动排序</text>
+			<button size="mini" bindtap="doSubmit">完成</button>
+		</view>
+		<drag data-type="realm" id="realm-drag" generic:item="drag-item" bind:click="deleteItem" bind:change="change" list-data="{{realmSortList}}" columns="{{4}}" item-height="{{52*2}}">
+		</drag>
+		<view class="title">
+			<text>其他领域</text>
+			<text class="tips">点击添加地域</text>
+		</view>
+		<view class="pool">
+			<view data-type="realm" data-index="{{index}}" wx:if="{{!item.checked}}" wx:for="{{realm}}" wx:key="realm" bindtap="onTagClick">
+				<view class="inner">
+					<text class="label"> {{item.realmName}}</text></view>
+			</view>
+		</view>
 	</view>
 
-	<view class="tags-wrapper">
-		<view><text>地域</text></view>
-		<i-tag data-type="area" wx:for="{{area}}" wx:key="index" bindchange="onChange" checkable="{{true}}" name="{{index}}" color="green" checked="{{item.checked}}" type="border" style="margin-right:5px;">
-			{{item.name}}
-		</i-tag>
+	<view class="section-wrapper" hidden="{{type!=='area'}}">
+		<view class="title">
+			<text>已选地域</text>
+			<text class="tips">长按可拖动排序</text>
+				<button size="mini" bindtap="doSubmit">完成</button>
+		</view>
+		<drag data-type="area" id="area-drag" generic:item="drag-item" bind:click="deleteItem" bind:change="change" list-data="{{areaSortList}}" columns="{{4}}" item-height="{{96}}">
+		</drag>
+		<view class="title"><text>其他地域</text>
+			<text class="tips">点击添加地域</text>
+		</view>
+			<view class="pool">
+			<view data-type="area" data-index="{{index}}" wx:if="{{!item.checked}}" wx:for="{{area}}" wx:key="area" bindtap="onTagClick">
+				<view class="inner">
+					<text class="label"> {{item.name}}</text></view>
+			</view>
+		</view>
 	</view>
-	<i-button bind:click="doSubmit" type="primary">确定</i-button>
 </view>

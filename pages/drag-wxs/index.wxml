@@ -1,0 +1,17 @@
+<view style="margin: 4rpx;">
+	<drag id="drag"
+				generic:item="drag-item"
+				bind:click="itemClick"
+				bind:change="change"
+				bind:sortend="sortEnd"
+				bind:scroll="scroll"
+				item-wrap-class="drag-item-wrap"
+				list-data="{{listData}}"
+				columns="{{size}}"
+				scroll-top="{{scrollTop}}"
+				item-height="{{(750 - 8) / size}}"
+				top-size="110">
+	</drag>
+</view>
+
+

@@ -1,9 +1,49 @@
-.tags-wrapper {
+.section-wrapper {
   padding: 0 15px;
-  margin: 10px 0;
   min-height: 100px;
 }
-.tags-wrapper text {
-  font-size: 18px;
+.section-wrapper .title {
+  margin-top: 15px;
+  margin-left: 5px;
+  font-size: 15px;
   font-weight: 500;
+  margin-bottom: 15px;
+  line-height: 30px;
+  height: 30px;
+}
+.section-wrapper .title .tips {
+  font-size: 13px;
+  color: #878E90;
+  margin-left: 5px;
+}
+.section-wrapper .title button {
+  vertical-align: middle;
+  float: right;
+  background-color: #00AFB7 !important;
+  color: #fff;
+}
+.section-wrapper .pool {
+  margin-top: -5px;
+  display: flex;
+  flex-wrap: wrap;
+  color: #353839;
+}
+.section-wrapper .pool > view {
+  width: 25%;
+}
+.section-wrapper .pool .label {
+  display: block;
+  font-size: 14px;
+  color: #353839;
+  line-height: 38px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+  padding: 0 10px;
+}
+.section-wrapper .pool .inner {
+  background-color: #F8F7F7;
+  margin: 7px 4px;
+  border-radius: 38px;
 }

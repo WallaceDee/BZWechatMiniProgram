@@ -16,7 +16,7 @@ page {
   flex: 1;
 }
 
-.article-list {
+.article-list,.result-list {
   flex: 1;
   position: relative;
 
@@ -37,7 +37,12 @@ page {
     }
   }
 
-  &.loaded article-list:empty+.no-data {
+  &.loaded article-list{
+    &:empty+.no-data {
+      display: block;
+    }
+  }
+  &.loaded .no-data:first-child {
     display: block;
   }
 }

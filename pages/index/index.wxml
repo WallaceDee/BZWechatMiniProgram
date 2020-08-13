@@ -14,7 +14,17 @@
 			</block>
 		</swiper>
 	</view>
-	<view class="filter-bar">
+		<view class="filter-bar single" wx:if="{{current==='mine'}}">
+	<view class="keyword-wrapper">
+		<image src="../../image/icon_search.svg"></image>
+		<input bindinput="onSearchInput" class="keyword" value="{{ keyword }}" placeholder="搜索关键字" />
+		<view class="clear-btn-wrapper" bindtap="clearKeyword">
+			<image src="/image/icon_delete_circle.svg" class="clear-btn" wx:if="{{keyword!==''}}"></image>
+		</view>
+	</view>
+	<button class="search-btn" bindtap="onSearch">搜索</button>
+</view>
+	<view class="filter-bar" wx:else>
 		<view class="search" bindtap="go2Search">
 			<image src="../../image/icon_search.svg"></image>
 			<text>搜索</text>

@@ -1,0 +1,8 @@
+text{
+  font-size: 14px;
+  color: #353839;
+  line-height: 38px;
+}
+.item{
+
+}

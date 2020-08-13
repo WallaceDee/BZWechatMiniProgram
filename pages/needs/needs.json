@@ -2,7 +2,9 @@
   "usingComponents": {
     "i-tag": "/components/tag/index",
     "i-button": "/components/button/index",
-    "i-spin": "/components/spin/index"
+    "i-spin": "/components/spin/index",
+    "drag": "/components/drag/index",
+		"drag-item": "./drag-item/index"
   },
   "navigationBarTitleText":""
 }

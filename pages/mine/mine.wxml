@@ -36,9 +36,9 @@
 		<i-cell title="我的发送" is-link bind:click="go2Sent">
 			<image class="icon" slot="icon" src="../../image/icon_email_gray.svg"></image>
 		</i-cell>
-		<i-cell title="我的需求" is-link>
+		<!-- <i-cell title="我的需求" is-link>
 			<image class="icon" slot="icon" src="../../image/icon_dialog.svg"></image>
-		</i-cell>
+		</i-cell> -->
 		<button class="i-cell i-cell-access cell-btn" open-type="contact">
 			<image class="icon i-cell-icon" src="../../image/icon_earphone.svg"></image>
 			<view class="i-cell-bd">

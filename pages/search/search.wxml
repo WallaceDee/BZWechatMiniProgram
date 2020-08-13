@@ -3,16 +3,58 @@
 	<view class="keyword-wrapper">
 		<image src="../../image/icon_search.svg"></image>
 		<input bindinput="onSearchInput" class="keyword" value="{{ keyword }}" placeholder="搜索关键字" />
+		<view class="clear-btn-wrapper" bindtap="clearKeyword">
+			<image src="/image/icon_delete_circle.svg" class="clear-btn" wx:if="{{keyword!==''}}"></image>
+		</view>
 	</view>
-	<button class="cancel-btn" bindtap="onCancel">取消</button>
+	<button class="search-btn" bindtap="onSearch">搜索</button>
+</view>
+<view class="auto-complete-list" wx:if="{{autoComplete.length}}">
+	<i-cell-group>
+		<i-cell title="{{item}}" wx:for="{{autoComplete}}" wx:key="auto" bindtap="onHotSearchOrHistoryClick" data-keyword="{{item}}">
+		<i-icon type="search" slot="icon" />
+		</i-cell>
+	</i-cell-group>
 </view>
 <view class="container">
-	<view class="hot-search">
+	<block wx:if="{{!searching}}">
+	<block wx:if="{{history.length}}">
+		<view class="title">
+			<image class="icon-clock" src="/image/icon_clock.svg"></image>
+			<text >历史搜索</text>
+			<image class="icon-delete" src="/image/icon_delete.svg" bindtap="deleteHistory"></image>
+		</view>
+		<scroll-view class="history" scroll-y="true" style="max-height: 76px;">
+			<text bindtap="onHotSearchOrHistoryClick" wx:key="history" data-keyword="{{item}}" class="history-item" wx:for="{{history}}">{{item}}</text>
+		</scroll-view>
+</block>
+	<block wx:if="{{hotKeywords.length}}">
 		<view class="title">
 			<text >热门搜索</text>
 		</view>
-		<i-cell-group>
-			<i-cell title="{{item.value}}" wx:for="{{hotKeywords}}" wx:key="keyword"></i-cell>
+		<scroll-view class="hot-keyword" scroll-y="true" style="height: 0;">
+			<i-cell-group>
+				<i-cell title="{{item.value}}" wx:for="{{hotKeywords}}" wx:key="keyword" bindtap="onHotSearchOrHistoryClick" data-keyword="{{item.value}}">
+					<view class="search-icon {{index===0?'icon-hot':''}} {{item.closest&&index?'icon-new':''}}" slot="icon">
+					</view>
+				</i-cell>
+			</i-cell-group>
+		</scroll-view>
+	</block>
+	</block>
+	<scroll-view wx:else class="result-list {{loaded?'loaded':''}}" scroll-y="true" style="height: 0;">
+		<i-spin fix wx:if="{{loading}}"></i-spin>
+		<i-cell-group wx:if="{{result.length}}">
+			<block wx:for="{{result}}" wx:for-item="section">
+				<i-cell bind:click="go2Article" wx:for="{{section.children}}" i-title="reslut-title" title="{{item.title}}" label="{{item.createTime}}" data-id="{{item.id}}">
+				</i-cell>
+			</block>
 		</i-cell-group>
-</view>
+		<view class="no-data">
+			<image src="../../image/no_content.svg"></image>
+			<text>暂无匹配内容~</text>
+		</view>
+		<i-load-more i-loading-class="theme-loading" wx:if="{{!item.allLoaded}}" />
+	</scroll-view>
+
 </view>

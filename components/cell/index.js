@@ -4,7 +4,7 @@ const warn = (msg, getValue) => {
 };
 
 Component({
-    externalClasses: ['i-class'],
+    externalClasses: ['i-class','i-title'],
 
     options: {
         multipleSlots: true

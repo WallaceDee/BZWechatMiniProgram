@@ -7,11 +7,10 @@ export const login = (data) => {
       data
   })
 }
-export const getArticleByArticleNo = (data) => {
+export const getArticleByArticleNo = (dataStr) => {
   return request({
       noToken:true,
-      url:'/cwArticleInfo/v1/number/info',
-      data
+      url:'/cwArticleInfo/v1/number/info?'+dataStr
   })
 }
 
@@ -56,9 +55,19 @@ export const getRealmPool = (data) => {
   })
 }
 
+
+export const deleteFavorite= (data) => {
+  return request({
+      url:'/cwLogin/v1/del/favorite',
+      data,
+      method:'post'
+  })
+}
+
+
 export const setFavorite= (data) => {
   return request({
-      url:'/cwLogin/v1/my/favorite',
+      url:'/cwLogin/v1/new/my/favorite',
       data,
       method:'post'
   })
@@ -153,3 +162,24 @@ export const getHotKeyword = (data) => {
   })
 }
 
+export const noteKeyword = (data) => {
+  return request({
+      url:'/search/add',
+      data
+  })
+}
+
+export const getAutoComplete = (data) => {
+  return request({
+      url:'/search/list',
+      data
+  })
+}
+
+export const setRealm= (data) => {
+  return request({
+      url:'/cwLoginInfo/v1/login/realm/replace',
+      data,
+      method:'post'
+  })
+}

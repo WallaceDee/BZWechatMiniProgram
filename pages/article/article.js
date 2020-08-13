@@ -40,9 +40,7 @@ Page({
     })
   },
   getArticleByArticleNo: function (articleNo) {
-    getArticleByArticleNo({
-      articleNo
-    }).then(res => {
+    getArticleByArticleNo(articleNo).then(res => {
       this.getDetailCallbackres(res)
     })
   },
@@ -82,8 +80,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (options.articleNo) {
-      this.getArticleByArticleNo(options.articleNo)
+    
+    if (options.scene) {
+      const scene = decodeURIComponent(options.scene)
+      this.getArticleByArticleNo(scene)
     } else {
       this.getArticle(options.id)
     }

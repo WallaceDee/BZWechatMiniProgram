@@ -2,9 +2,10 @@
 import {
   getAreaPool,
   getRealmPool,
+  deleteFavorite,
   setFavorite
 } from '../../api'
-const app=getApp()
+const app = getApp()
 Page({
 
   /**
@@ -12,53 +13,57 @@ Page({
    */
   data: {
     area: [],
+    loading: false,
     realm: [],
-    loading: false
+    realmSortList: [],
+    areaSortList: [],
+    type: 'realm'
   },
-  onChange(event) {
+  onTagClick(event) {
     const {
-      detail
-    } = event
-    const {
+      index,
       type
     } = event.currentTarget.dataset
     this.setData({
-      [`${type}[${event.detail.name}].checked`]: detail.checked
+      [`${type}[${index}].checked`]: true
     })
+    this.data[`${type}SortList`].push(this.data[type][index])
+    this.setData({
+      [`${type}SortList`]: this.data[`${type}SortList`]
+    })
+    if (type === 'realm') {
+      const realmDrag = this.selectComponent('#realm-drag');
+      realmDrag.init();
+    } else {
+      const areaDrag = this.selectComponent('#area-drag');
+      areaDrag.init();
+    }
   },
   doSubmit: function () {
     let cityCodes = []
     let realmIds = []
-    this.data.area.filter(item => {
-      return item.checked
-    }).map(item => {
-      cityCodes.push(item.code)
-    })
-    this.data.realm.filter(item => {
-      return item.checked
-    }).map(item => {
-      realmIds.push(item.id)
-    })
-    if(!cityCodes.length||!realmIds.length){
-      wx.showToast({
-        title: '请选择一个或以上领域或地域',
-        icon: 'none',
-        duration: 2000
+    this.data.areaSortList.map((item, index) => {
+      cityCodes.push({
+        code: item.code,
+        sort: index
       })
-      return false
-    }
+    })
+
+    this.data.realmSortList.map((item, index) => {
+      realmIds.push({
+        realmId: item.id,
+        sort: index
+      })
+    })
+
     setFavorite({
       cityCodes,
       realmIds
-    }).then(res=>{
-      if(res.code===80200){
-        app.globalData.userInfo.ownedCities=this.data.area.filter(item => {
-          return item.checked
-        })
-        app.globalData.userInfo.ownedRealms=this.data.realm.filter(item => {
-          return item.checked
-        })
-        app.globalData.hasChangeTags=true
+    }).then(res => {
+      if (res.code === 80200) {
+        app.globalData.userInfo.ownedCities = this.data.areaSortList
+        app.globalData.userInfo.ownedRealms = this.data.realmSortList
+        app.globalData.hasChangeTags = true
         wx.navigateBack({
           delta: 1
         })
@@ -72,11 +77,79 @@ Page({
     })
 
   },
+  sortEnd(e) {
+    console.log("sortEnd", e.detail.listData)
+    this.setData({
+      listData: e.detail.listData
+    });
+  },
+  change(e) {
+    console.log("change", e.detail.listData)
+    this.setData({
+      realmSortList: e.detail.listData
+    })
+  },
+  itemClick(e) {
+    console.log(e);
+  },
+  deleteItem(e) {
+    console.log(e);
+    const {
+      type
+    } = e.currentTarget.dataset
+    const {
+      id,
+      code
+    } = e.detail.data
+    const list = this.data[`${type}SortList`]
+    let deleteIndex = -1
+    for (let index = 0; index < list.length; index++) {
+      const element = list[index];
+      if (type === 'realm' && element.id === id) {
+        deleteIndex = index
+        break
+      }
+      if (type === 'area' && element.code === code) {
+        deleteIndex = index
+        break
+      }
+    }
+    this.data[`${type}SortList`].splice(deleteIndex, 1)
+    this.setData({
+      [`${type}SortList`]: this.data[`${type}SortList`]
+    })
+    if (type === 'realm') {
+      const realmDrag = this.selectComponent('#realm-drag');
+      realmDrag.init();
+    } else {
+      const areaDrag = this.selectComponent('#area-drag');
+      areaDrag.init();
+    }
+    let recoverIndex = -1
+    for (let index = 0; index < this.data[type].length; index++) {
+      const element = this.data[type][index];
+      if (type === 'realm' && element.id === id) {
+        recoverIndex = index
+        break
+      }
+      if (type === 'area' && element.code === code) {
+        recoverIndex = index
+        break
+      }
+    }
+    console.log([`${type}[${recoverIndex}].checked`])
+    this.setData({
+      [`${type}[${recoverIndex}].checked`]: false
+    })
+    console.log(this.data[type][recoverIndex].checked)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: async function (options) {
+
     this.setData({
+      type: options.type,
       loading: true
     })
     let areaRawData = await getAreaPool({
@@ -86,31 +159,49 @@ Page({
       size: 999
     })
     if (areaRawData.code === 80200 && realmRawData.code === 80200) {
-      const app=getApp()
+      const app = getApp()
       let areas
       let realms
-      if(app.globalData.userInfo){
-        let ownedCities=app.globalData.userInfo.ownedCities||[]
-        let ownedRealms=app.globalData.userInfo.ownedRealms||[] 
+      if (app.globalData.userInfo) {
 
-        areas=areaRawData.data.records
-        realms=realmRawData.data.records
-        ownedCities.map(item=>{
-              for(let index=0;index<areas.length;index++){
-                if(item.code===areas[index].code){
-                  areas[index].checked=true
-                  break
-                }
-              }
-          })
+        let ownedCities = app.globalData.userInfo.ownedCities || []
+        let ownedRealms = app.globalData.userInfo.ownedRealms || []
+        ownedRealms.map(item => {
+          item.title = item.realmName
+          item.dragId = item.id
+        })
+        this.setData({
+          realmSortList: ownedRealms
+        })
+        ownedCities.map(item => {
+          item.title = item.name
+          item.dragId = item.code
+        })
+        this.setData({
+          areaSortList: ownedCities
+        })
+        areas = areaRawData.data.records
+        realms = realmRawData.data.records
+        realms.map(item => {
+          item.dragId = item.id
+        })
 
-          ownedRealms.map(item=>{
-            for(let index=0;index<realms.length;index++){
-              if(item.id===realms[index].id){
-                realms[index].checked=true
-                break
-              }
+        ownedCities.map(item => {
+          for (let index = 0; index < areas.length; index++) {
+            if (item.code === areas[index].code) {
+              areas[index].checked = true
+              break
             }
+          }
+        })
+
+        ownedRealms.map(item => {
+          for (let index = 0; index < realms.length; index++) {
+            if (item.id === realms[index].id) {
+              realms[index].checked = true
+              break
+            }
+          }
         })
       }
 
@@ -119,7 +210,10 @@ Page({
         area: areas,
         realm: realms
       })
-
+      const realmDrag = this.selectComponent('#realm-drag');
+      realmDrag.init();
+      const areaDrag = this.selectComponent('#area-drag');
+      areaDrag.init();
     }
   },
 
@@ -168,7 +262,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
 
-  }
+  // }
 })

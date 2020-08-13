@@ -7,6 +7,6 @@
 			<image src="../../image/no_content.svg"></image>
 			<text>暂无内容~</text>
 		</view>
-		<i-load-more i-loading-class="theme-loading" wx:if="{{!item.allLoaded}}" />
+		<i-load-more i-loading-class="theme-loading" wx:if="{{!allLoaded}}" />
 	</scroll-view>
 </view>

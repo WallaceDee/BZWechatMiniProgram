@@ -10,7 +10,8 @@
     "pages/needs/needs",
     "pages/webview/webview",
     "pages/collocation/collocation",
-    "pages/sent/sent"
+    "pages/sent/sent",
+    "pages/drag-wxs/index"
   ],
   "tabBar": {
     "custom": false,

@@ -9,6 +9,12 @@
   padding-left: 15px;
   position: relative;
 }
+.section.list {
+  padding-left: 0 ;
+}
+.section.list:before {
+  display: none;
+}
 .section .time-title {
   display: block;
   background-color: #fff;

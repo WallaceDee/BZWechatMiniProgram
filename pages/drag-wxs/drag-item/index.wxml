@@ -1,0 +1,4 @@
+<view catchtap="itemClick">
+<view class="item">	<text>{{itemData.title}}</text> </view>
+	
+</view>

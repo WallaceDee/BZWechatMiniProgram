@@ -1,5 +1,5 @@
 // pages/profile/profile.js
-import {decryptPhoneNumber,updateUserInfo} from '../../api'
+import {decryptPhoneNumber,updateUserInfo,getRealmPool,setRealm} from '../../api'
 const app = getApp()
 const genderMapping = new Map([
   [1, '男'],
@@ -27,7 +27,8 @@ Page({
     },{
       label:'女',
       value:2
-    }]
+    }],
+    realms:[]
   },
   tapDialogButton(e) {
     const {type}=e.detail.item
@@ -91,6 +92,25 @@ openEditDialog:function(e){
       }
     })
   },
+  getRealmPool(){
+    getRealmPool({
+      size: 999
+    }).then(res=>{
+      if(res.code===80200){
+        this.setData({
+          realms:res.data.records
+        })
+      }
+    })
+  },
+  onRealmChange(event){
+  let  {value}=	 event.detail 
+  console.log(value,event)
+  setRealm({
+    realmId:this.data.realms[value].id,
+    id:app.globalData.userInfo.id
+  })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -98,6 +118,7 @@ openEditDialog:function(e){
     this.setData({
       userInfo: app.globalData.userInfo
     })
+      this.getRealmPool()
   },
 
   /**

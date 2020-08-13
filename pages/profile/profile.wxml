@@ -8,10 +8,10 @@
 			</view>
 		</i-cell>
 		<!-- is-link -->
-		<i-cell title="性别" >
-			<view slot="footer" class="cell-footer">
+		<i-cell title="性别" value="{{userInfo.sex===1?'男':userInfo.sex===2?'女':'未知'}}">
+			<!-- <view slot="footer" class="cell-footer">
 				<picker range="{{gender}}" range-key="label">{{userInfo.sex===1?'男':userInfo.sex===2?'女':'未知'}}</picker>
-			</view>
+			</view> -->
 		</i-cell>
 		<i-cell title="手机号码" is-link="{{!userInfo.phoneNumber}}">
 			<view slot="footer" class="cell-footer">
@@ -24,9 +24,21 @@
 				{{userInfo.accountEmail?userInfo.accountEmail:'点击设置'}}
 			</view>
 		</i-cell>
-		<i-cell title="领域" value="美术" is-link></i-cell>
-		<i-cell title="单位" value="帮专知识产权服务有限公司" is-link></i-cell>
-		<i-cell title="职位" value="美术老师" is-link></i-cell>
+		<i-cell title="领域" is-link>
+				<view slot="footer" class="cell-footer">
+				<picker range="{{realms}}" range-key="realmName" bindchange="onRealmChange">{{userInfo.realmName?userInfo.realmName:'点击设置'}}</picker>
+			</view>
+		</i-cell>
+		<i-cell title="单位" is-link  onlyTapFooter is-link bind:click="openEditDialog" data-field="companyName" data-title="单位" data-value="{{userInfo.companyName}}">
+			<view slot="footer" class="cell-footer">
+			{{userInfo.companyName?userInfo.companyName:'点击设置'}}
+			</view>
+		</i-cell>
+		<i-cell title="职位" is-link  onlyTapFooter is-link bind:click="openEditDialog" data-field="jobName" data-title="职位" data-value="{{userInfo.jobName}}">
+					<view slot="footer" class="cell-footer">
+			{{userInfo.jobName?userInfo.jobName:'点击设置'}}
+			</view>
+		</i-cell>
 	</i-cell-group>
 	<mp-dialog title="{{dialog.title}}" show="{{ dialog.visible }}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
 		<input bindinput="bindKeyInput" value="{{ dialog.value }}" placeholder="{{dialog.placeholder}}" />

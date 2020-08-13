@@ -30,6 +30,7 @@ function base64src(base64data, callback) {
 };
 function getImageInfo(url) {
   return new Promise((resolve, reject) => {
+    console.log(url)
     wx.getImageInfo({
       src: url,
       success: resolve,
@@ -185,18 +186,17 @@ Component({
 
       const context = wx.createCanvasContext('image', this)
 
-      const backgroundPromise = getImageInfo(cover)
-      const avatarPromise = getImageInfo(userInfo.headImg)
+      const backgroundPromise = getImageInfo(cover?cover:'https://manage.bangzhuanwang.com/wx-images/default_cover.jpg')
+      const avatarPromise = getImageInfo(userInfo?userInfo.headImg:'https://manage.bangzhuanwang.com/wx-images/default_avatar.png')
       const unlimitedPromise=new Promise((resolve, reject) => {
           getUnlimited({
-            // page: 'pages/article/article',
+            page: 'pages/article/article',
             scene: 'articleNo=' + articleNo,
             width: 280,
             auto_color: true,
             is_hyaline: true
           }).then(res => {
             base64src("data:image/png;base64," +res.data,(path)=>{
-              console.log()
               wx.getImageInfo({
                 src: path,
                 success: resolve,
@@ -227,7 +227,6 @@ Component({
         let numberPerLine = parseInt((textMaxWidth) / fontSize)
         let line = title.length / numberPerLine
         for (let index = 0; index <= maxLine; index++) {
-          console.log(index)
           let text = title.substring(index * numberPerLine, numberPerLine)
           if (line >= maxLine && index === maxLine) {
             text = text.substr(0, text.length - 2) + '...'
@@ -255,9 +254,9 @@ Component({
         fontSize = 12
         context.font = `normal ${fontSize}px Microsoft YaHei`;
         context.fillStyle = "#000";
-        context.fillText(userInfo.nickname, 130, canvasHeight * .82);
+        context.fillText(userInfo?userInfo.nickname:'帮专用户', 130, canvasHeight * .82);
         context.fillStyle = "#6E6E6E";
-        context.fillText('正在阅读这篇文章', 175, canvasHeight * .82);
+        context.fillText('正在阅读这篇文章', 130+5+12*(userInfo?userInfo.nickname:'帮专用户').length, canvasHeight * .82);
         fontSize = 10
         context.font = `normal ${fontSize}px Microsoft YaHei`;
         context.fillText('识别小程序码，进入 　　　　　　　　 阅读全文', 90, canvasHeight * .94);

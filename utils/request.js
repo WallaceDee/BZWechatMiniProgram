@@ -24,14 +24,16 @@ export async function request({
   noToken=false
 }) {
   return new Promise(async function (resolve, reject) {
-    wx.showLoading({
-      title: '加载中',
-    })
     let app=await onAppReady()
     let Authorization = noToken?'':app.globalData.token
     let header = Object.assign({
       Authorization
     })
+    console.info({
+      url: baseUrl + url,
+      method,
+      data,
+      header})
     wx.request({
       url: baseUrl + url,
       method,
@@ -39,7 +41,7 @@ export async function request({
       header,
       complete,
       success(res) {
-        wx.hideLoading()
+        console.log(res)
         try {
           resolve(res.data);
         } catch (error) {
@@ -47,7 +49,7 @@ export async function request({
         }
       },
       fail(err) {
-        wx.hideLoading()
+        console.error(err)
         reject(err)
       }
     })

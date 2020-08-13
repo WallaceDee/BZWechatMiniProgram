@@ -31,7 +31,7 @@
 		"userConfirmedUseCompilerModuleSwitch": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.5.0",
+	"libVersion": "2.12.0",
 	"appid": "wx754b2184bee57530",
 	"projectname": "%E4%B8%93%E5%88%A9%E5%88%9B%E6%96%B0%E6%8E%A8%E9%80%81%E4%B8%AD%E5%BF%83",
 	"debugOptions": {
@@ -75,7 +75,14 @@
 					"id": 1,
 					"name": "pages/article/article",
 					"pathName": "pages/article/article",
-					"query": "id=0521b32192be4142bb5d360ebfc88fc6",
+					"query": "scene=articleNo%3D5",
+					"scene": 1012
+				},
+				{
+					"id": 2,
+					"name": "pages/needs/needs",
+					"pathName": "pages/needs/needs",
+					"query": "",
 					"scene": null
 				}
 			]

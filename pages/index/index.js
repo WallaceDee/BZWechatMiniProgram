@@ -14,10 +14,12 @@ Page({
    * 页面的初始数据
    */
   data: {
+    keyword:'',
     banners: [{}],
     activeTab: {
       realm: 0,
-      area: 0
+      area: 0,
+      mine:0
     },
     current: 'realm',
     headerTabs: [{
@@ -26,20 +28,22 @@ Page({
     }, {
       label: '地域',
       name: 'area'
+    }, {
+      label: '精准',
+      name: 'mine'
     }],
     tagTabs: {
       realm: [],
       area: [],
+      mine:[{
+        title:'我的'
+      }]
     },
     list: {
       realm: [],
-      area: []
+      area: [],
+      mine:[]
     },
-    loading: false,
-    loaded: false,
-    allLoaded: false,
-    page: 1,
-    size: 20,
     navHeight: 40
   },
   onSwiperClick(e) {
@@ -61,20 +65,14 @@ Page({
   },
   onTagTabChange(e) {
     const index = e.detail.index
-    if (this.data.current === 'realm') {
-      console.log(Object.assign(this.data.activeTab, {
-        realm: index
-      }))
+    const {current}=this.data
+    if (current === 'realm') {
       this.setData({
-        activeTab: Object.assign(this.data.activeTab, {
-          realm: index
-        })
+        ['activeTab.realm']:index
       })
-    } else {
+    } else if (current === 'area'){
       this.setData({
-        activeTab: Object.assign(this.data.activeTab, {
-          area: index
-        })
+       ['activeTab.area']:index
       })
     }
     this.getArticleList()
@@ -94,9 +92,25 @@ Page({
     })
   },
   go2Category() {
+    if(app.globalData.userInfo){
     wx.navigateTo({
-      url: '/pages/needs/needs'
+      url: '/pages/needs/needs?type='+this.data.current
     })
+  }else{
+    wx.showModal({
+      title: '提示',
+      showCancel:false,
+      content: '您还没有登录呢!',
+      confirmText:'去登录',
+      success (res) {
+        if (res.confirm) {
+          wx.switchTab({
+            url: '/pages/mine/mine'
+          })
+        }
+      }
+    })
+  }
   },
   getBannerList() {
     getBannerList().then(res => {
@@ -109,8 +123,9 @@ Page({
     })
   },
   getArticleList() {
-    let currentData = this.data.list[this.data.current]
-    let dataIndex = this.data.activeTab[this.data.current]
+    const { current:currentTabName,activeTab,list}=this.data
+    let currentData = list[currentTabName]
+    let dataIndex = activeTab[currentTabName]
     let currentTabData = currentData[dataIndex] = currentData[dataIndex] || {
       data: [],
       page: 1,
@@ -127,23 +142,24 @@ Page({
     }
     currentTabData.loading = true
     this.setData({
-      list: this.data.list
+      [`list.${currentTabName}[${dataIndex}].loading`]:true
     })
     const current = currentTabData.page
     let params = {
       current,
       size: this.data.size
     }
-    if (this.data.current === 'realm') {
-      params.realmIdsStr = this.data.tagTabs[this.data.current][this.data.activeTab[this.data.current]].id
-    } else {
-      params.cityCodes = [this.data.tagTabs[this.data.current][this.data.activeTab[this.data.current]].code]
+    if (currentTabName === 'realm') {
+      params.realmIdsStr = this.data.tagTabs[currentTabName][activeTab[currentTabName]].id
+    } else  if (currentTabName === 'area') {
+      params.cityCodes = [this.data.tagTabs[currentTabName][activeTab[currentTabName]].code]
     }
     getArticleList(params).then(res => {
       currentData[dataIndex].loading = false
       currentData[dataIndex].loaded = true
       this.setData({
-        list: this.data.list
+        [`list.${currentTabName}[${dataIndex}].loading`]:false,
+        [`list.${currentTabName}[${dataIndex}].loaded`]:true
       })
       if (res.code === 80200) {
         currentData[dataIndex] = {
@@ -154,17 +170,17 @@ Page({
         if (currentData[dataIndex].data.length >= res.data.total || !res.data.records.length) {
           currentData[dataIndex].allLoaded = true
         }
-        if (this.data.current === 'realm') {
+        if (currentTabName === 'realm') {
           this.setData({
-            list: Object.assign(this.data.list, {
-              realm: currentData
-            })
+            'list.realm':currentData
+          })
+        } else  if (currentTabName === 'area') {
+          this.setData({
+            'list.area':currentData
           })
         } else {
           this.setData({
-            list: Object.assign(this.data.list, {
-              area: currentData
-            })
+            'list.mine':currentData
           })
         }
       }
@@ -179,13 +195,14 @@ Page({
       ownedCities = app.globalData.userInfo.ownedCities
     }
     
-    if(!ownedRealms.length||!ownedCities.length){
-      let tempRawData = await getAreaPool()
-      ownedCities = tempRawData.data.records
-      tempRawData = await getRealmPool()
+    if(!ownedRealms.length){
+      let tempRawData = await getRealmPool()
       ownedRealms = tempRawData.data.records
     }
-    if (ownedRealms.length || ownedCities.length) {
+    if(!ownedCities.length){
+      let tempRawData = await getAreaPool()
+      ownedCities = tempRawData.data.records
+    }
       ownedRealms.map(item => {
         item.title = item.realmName
       })
@@ -193,13 +210,10 @@ Page({
         item.title = item.name
       })
       this.setData({
-        tagTabs: {
-          realm: ownedRealms,
-          area: ownedCities
-        }
+        'tagTabs.realm':ownedRealms,
+        'tagTabs.area':ownedCities
       })
       this.getArticleList()
-    }
   },
   /**
    * 生命周期函数--监听页面加载
